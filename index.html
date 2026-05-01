@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nea Labs — Activation SaaS</title>
+  <meta name="description" content="Cabinet de conseil en activation SaaS. Pour les founders B2B post-PMF avec leurs premiers users payants. On identifie pourquoi ils ne reviennent pas.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Nea Labs — Activation SaaS">
+  <meta property="og:description" content="Pour les SaaS post-PMF avec leurs premiers users payants. On identifie pourquoi ils ne reviennent pas — et on construit le parcours qui les rend actifs.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nealabs.fr">
+  <meta property="og:image" content="https://nealabs.fr/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nea Labs — Activation SaaS">
+  <meta name="twitter:description" content="Pour les SaaS post-PMF avec leurs premiers users payants.">
+  <meta name="theme-color" content="#F5F5F4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0A0A0A" media="(prefers-color-scheme: dark)">
+
+  <!--
+  === ANALYTICS PLACEHOLDERS ===
+
+  Meta Pixel:
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'YOUR_PIXEL_ID');
+    fbq('track', 'PageView');
+  </script>
+
+  LinkedIn Insight Tag:
+  <script type="text/javascript">
+    _linkedin_partner_id = "YOUR_PARTNER_ID";
+    window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+    window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+  </script>
+  <script type="text/javascript">
+    (function(l) {
+      if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])};
+      window.lintrk.q=[]}
+      var s = document.getElementsByTagName("script")[0];
+      var b = document.createElement("script");
+      b.type = "text/javascript";b.async = true;
+      b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+      s.parentNode.insertBefore(b, s);})(window.lintrk);
+  </script>
+
+  Plausible Analytics:
+  <script defer data-domain="nealabs.fr" src="https://plausible.io/js/script.js"></script>
+  -->
+
+  <!-- Google Fonts — Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+
+  <!-- Alpine.js collapse plugin (must load before Alpine) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+  <!-- Alpine.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #F5F5F4;
+      color: #0A0A0A;
+      -webkit-font-smoothing: antialiased;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button, a { touch-action: manipulation; }
+
+    /* Typography — hybride Taap.it × Revolut */
+    .h1 {
+      font-size: clamp(40px, 6.8vw, 88px);
+      font-weight: 600;
+      letter-spacing: -0.045em;
+      line-height: 1.02;
+      text-wrap: balance;
+    }
+    .h2 {
+      font-size: clamp(32px, 4.6vw, 56px);
+      font-weight: 600;
+      letter-spacing: -0.035em;
+      line-height: 1.05;
+      text-wrap: balance;
+    }
+    .body {
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 1.55;
+      letter-spacing: 0.005em;
+      color: #525252;
+      text-wrap: pretty;
+    }
+
+    /* Footer social hover (replaces inline onmouseover) */
+    .footer-social { color: rgba(255,255,255,0.55); transition: color 150ms ease; }
+    .footer-social:hover, .footer-social:focus-visible { color: #fff; }
+
+    /* Dark sections — color-scheme hint for native UI (scrollbars, autofill) */
+    .dark-surface { color-scheme: dark; }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* Badge pill */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #fff;
+      border: 1px solid #E7E5E4;
+      border-radius: 9999px;
+      padding: 7px 14px;
+      font-size: 13px;
+      color: #404040;
+      font-weight: 500;
+    }
+
+    /* Card */
+    .card {
+      background: #fff;
+      border: 1px solid #E7E5E4;
+      border-radius: 22px;
+      padding: 32px;
+    }
+
+    /* Section spacing */
+    .section {
+      padding-top: 140px;
+      padding-bottom: 140px;
+    }
+    @media (max-width: 768px) {
+      .section { padding-top: 80px; padding-bottom: 80px; }
+    }
+
+    /* Container */
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    @media (max-width: 640px) {
+      .wrap { padding: 0 16px; }
+    }
+
+    /* Focus */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid #10B981;
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* FAQ accordion */
+    [x-cloak] { display: none !important; }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAV — floating pill
+     ============================================================ -->
+<nav aria-label="Navigation principale" class="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
+  <div class="wrap w-full flex items-center justify-between bg-white rounded-full px-5 py-3"
+       style="border: 1px solid #E7E5E4; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+
+    <!-- Logo -->
+    <a href="/" class="flex items-center font-semibold text-[14px] text-[#0A0A0A] shrink-0" style="letter-spacing:0.14em;" translate="no" aria-label="Nea Labs — accueil">
+      NEA LABS
+    </a>
+
+    <!-- Center links (desktop) -->
+    <div class="hidden md:flex items-center gap-7">
+      <a href="#methode"  class="text-[14px] text-[#525252] hover:text-[#0A0A0A] transition-colors">Méthode</a>
+      <a href="#tarif"    class="text-[14px] text-[#525252] hover:text-[#0A0A0A] transition-colors">Tarif</a>
+      <a href="#faq"      class="text-[14px] text-[#525252] hover:text-[#0A0A0A] transition-colors">FAQ</a>
+    </div>
+
+    <!-- Right actions -->
+    <div class="flex items-center gap-3 shrink-0">
+
+      <a href="https://cal.com/kevin-silve/30min" target="_blank" rel="noopener"
+         class="bg-[#0A0A0A] text-white rounded-full px-4 py-2 text-[13px] font-medium hover:bg-[#262626] transition-colors whitespace-nowrap"
+         aria-label="Réserver un diagnostic gratuit">
+        Réserver un diagnostic
+      </a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="min-h-screen flex flex-col items-center justify-center text-center"
+         style="background:#F5F5F4; padding-top:120px; padding-bottom:80px;">
+  <div class="wrap flex flex-col items-center gap-7">
+
+    <!-- Badge -->
+    <div class="badge">
+      <span class="relative flex w-2 h-2" aria-hidden="true">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-50" style="background:#10B981;"></span>
+        <span class="relative inline-flex rounded-full w-2 h-2" style="background:#10B981;"></span>
+      </span>
+      Audit d’activation pour SaaS
+    </div>
+
+    <!-- H1 -->
+    <h1 class="h1" style="max-width:860px; color:#0A0A0A;">
+      Le problème, ce n’est pas votre acquisition.<br>C’est ce qui se passe après.
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="body" style="max-width:560px; font-size:18px;">
+      Audit d’activation pour SaaS B2B post-PMF. On construit le pont entre vos signups payants et l’adoption durable. En 2&nbsp;semaines.
+    </p>
+
+    <!-- CTA group — double pill principal + outlined secondaire -->
+    <div class="flex flex-col items-center gap-4">
+      <div class="flex flex-col sm:flex-row items-center gap-3">
+
+        <!-- Primary: double pill -->
+        <div class="inline-flex items-center gap-1.5 bg-white rounded-full p-1.5"
+             style="border:1px solid #E7E5E4; box-shadow:0 0 40px rgba(16,185,129,0.22);">
+          <span class="px-5 py-3 text-[#0A0A0A] text-[15px] font-medium select-none">Commencer</span>
+          <a href="https://cal.com/kevin-silve/30min" target="_blank" rel="noopener"
+             class="bg-[#10B981] text-white rounded-full text-[15px] font-medium hover:bg-[#059669] transition-opacity hover:opacity-90"
+             style="padding:14px 28px; letter-spacing:0.005em;"
+             aria-label="Auditer mon activation — réserver un diagnostic gratuit">
+            Auditer mon activation →
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Micro-text -->
+      <p class="text-[13px]" style="color:#A3A3A3; letter-spacing:0.01em;">30&nbsp;min&nbsp;· Sans engagement&nbsp;· 100%&nbsp;remote</p>
+    </div>
+
+    <!-- Decorative tab selector -->
+    <div class="inline-flex items-center bg-white rounded-full p-1 mt-2"
+         style="border:1px solid #E7E5E4; box-shadow:0 1px 3px rgba(0,0,0,0.04);"
+         role="presentation" aria-hidden="true">
+      <span class="px-4 py-2 text-[13px] text-[#A3A3A3]">Acquisition</span>
+      <span class="flex items-center gap-2 px-4 py-2 rounded-full bg-[#0A0A0A] text-white text-[13px] font-medium">
+        <span class="w-1.5 h-1.5 rounded-full" style="background:#10B981;"></span>
+        Audit d’activation
+      </span>
+      <span class="px-4 py-2 text-[13px] text-[#A3A3A3]">Activation Sprint</span>
+      <span class="hidden sm:block px-4 py-2 text-[13px] text-[#A3A3A3]">Adoption Sprint</span>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CHAÎNON MANQUANT — entre acquisition et adoption
+     ============================================================ -->
+<section class="section" style="background:#F5F5F4; padding-top:80px; padding-bottom:80px;">
+  <div class="wrap">
+
+    <div class="flex flex-col items-center text-center gap-4 mb-12">
+      <div class="badge">Le chaînon manquant</div>
+      <h2 class="h2" style="max-width:760px; color:#0A0A0A;">
+        Vous ne perdez pas vos users à l’acquisition. Ni à l’adoption. Entre les deux.
+      </h2>
+      <p class="body" style="max-width:560px; font-size:17px;">
+        L’activation, c’est le pont entre payer pour un produit et l’intégrer dans son quotidien. Sans ce pont, l’adoption ne se produit jamais, peu importe la qualité de votre produit.
+      </p>
+    </div>
+
+    <!-- Visual: 3 steps horizontaux -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-4xl mx-auto items-stretch">
+
+      <!-- Step 1: Acquisition (faded) -->
+      <div class="card flex flex-col" style="padding:24px; background:#FAFAF9; opacity:0.7;">
+        <p class="text-[11px] font-bold mb-3" style="color:#A3A3A3; letter-spacing:0.16em;">ÉTAPE 1</p>
+        <h3 class="text-[18px] font-semibold mb-2" style="color:#0A0A0A;">Acquisition</h3>
+        <p class="text-[14px]" style="color:#525252; line-height:1.55;">L’utilisateur découvre, s’inscrit, paye. La plupart des founders maîtrisent ça.</p>
+      </div>
+
+      <!-- Step 2: Activation (highlighted) -->
+      <div class="card flex flex-col" style="padding:24px; border:2px solid rgba(16,185,129,0.4); box-shadow:0 0 30px rgba(16,185,129,0.15);">
+        <p class="text-[11px] font-bold mb-3" style="color:#10B981; letter-spacing:0.16em;">ÉTAPE 2&nbsp;· LE TROU NOIR</p>
+        <h3 class="text-[18px] font-semibold mb-2" style="color:#0A0A0A;">Activation</h3>
+        <p class="text-[14px]" style="color:#525252; line-height:1.55;">L’utilisateur ressent la valeur pour la première fois. C’est ici que la majorité des SaaS perdent leurs users payants.</p>
+      </div>
+
+      <!-- Step 3: Adoption (faded) -->
+      <div class="card flex flex-col" style="padding:24px; background:#FAFAF9; opacity:0.7;">
+        <p class="text-[11px] font-bold mb-3" style="color:#A3A3A3; letter-spacing:0.16em;">ÉTAPE 3</p>
+        <h3 class="text-[18px] font-semibold mb-2" style="color:#0A0A0A;">Adoption</h3>
+        <p class="text-[14px]" style="color:#525252; line-height:1.55;">L’utilisateur intègre le produit à son quotidien. Le MRR devient récurrent. C’est le but final.</p>
+      </div>
+
+    </div>
+
+    <p class="text-center mt-12 font-medium" style="font-size:18px; color:#0A0A0A; max-width:680px; margin-left:auto; margin-right:auto;">
+      Notre job&nbsp;: construire le pont qui transforme un user payant en user adopté.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CONSTAT — 3 cards
+     ============================================================ -->
+<section class="section" style="background:#FAFAF9;">
+  <div class="wrap">
+
+    <!-- Header -->
+    <div class="flex flex-col items-center text-center gap-4 mb-14">
+      <div class="badge">Le constat</div>
+      <h2 class="h2" style="color:#0A0A0A;">Si vous reconnaissez ça, on peut s’aider.</h2>
+    </div>
+
+    <!-- Cards grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+      <div class="card">
+        <p class="text-[11px] font-semibold mb-5 tracking-widest" style="color:#A3A3A3; letter-spacing:0.12em;">01</p>
+        <h3 class="text-[19px] font-semibold mb-3 leading-snug" style="color:#0A0A0A; letter-spacing:-0.01em;">
+          Vous signez des clients mais ils ne reviennent jamais.
+        </h3>
+        <p class="text-[15px]" style="color:#525252; line-height:1.6;">
+          Votre acquisition fonctionne. Votre produit convainc à la démo. Puis silence, plus de nouvelles.
+        </p>
+      </div>
+
+      <div class="card">
+        <p class="text-[11px] font-semibold mb-5 tracking-widest" style="color:#A3A3A3; letter-spacing:0.12em;">02</p>
+        <h3 class="text-[19px] font-semibold mb-3 leading-snug" style="color:#0A0A0A; letter-spacing:-0.01em;">
+          Vous avez fait l’onboarding. La rétention n’a pas bougé.
+        </h3>
+        <p class="text-[15px]" style="color:#525252; line-height:1.6;">
+          Tour produit, checklists, emails de bienvenue… tout est en place. Mais 30&nbsp;jours après, vos courbes restent plates. Vous commencez à douter du produit lui-même.
+        </p>
+      </div>
+
+      <div class="card">
+        <p class="text-[11px] font-semibold mb-5 tracking-widest" style="color:#A3A3A3; letter-spacing:0.12em;">03</p>
+        <h3 class="text-[19px] font-semibold mb-3 leading-snug" style="color:#0A0A0A; letter-spacing:-0.01em;">
+          Vous ne savez pas qui est vraiment activé.
+        </h3>
+        <p class="text-[15px]" style="color:#525252; line-height:1.6;">
+          Sans définition claire d’un utilisateur activé, vous pilotez à l’aveugle et chaque nouveau client risque de churner.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Transition phrase -->
+    <p class="text-center mt-16 font-medium" style="font-size:clamp(17px,2vw,22px); color:#737373; line-height:1.55; max-width:760px; margin-left:auto; margin-right:auto;">
+      Le problème n’est pas votre produit. C’est le chemin entre l’inscription
+      et la première vraie utilisation.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     POSITIONNEMENT — comparatif
+     ============================================================ -->
+<section class="section" style="background:#F5F5F4;">
+  <div class="wrap">
+
+    <!-- Header -->
+    <div class="flex flex-col items-center text-center gap-4 mb-14">
+      <div class="badge">Notre approche</div>
+      <h2 class="h2" style="max-width:660px; color:#0A0A0A;">L’onboarding "classique" ne suffit plus.</h2>
+      <p class="body" style="max-width:480px;">Deux philosophies. Des résultats très différents.</p>
+    </div>
+
+    <!-- Comparison -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl mx-auto">
+
+      <!-- Left: classic -->
+      <div class="card" style="background:#FAFAF9;">
+        <p class="text-[12px] font-semibold mb-6" style="color:#A3A3A3; letter-spacing:0.08em;">Onboarding UX classique</p>
+        <ul class="flex flex-col gap-4">
+          <li class="flex items-start gap-3">
+            <span class="mt-[5px] w-4 h-4 rounded-full flex items-center justify-center shrink-0" style="background:#F0EFEE; border:1px solid #E7E5E4;">
+              <span class="w-1 h-1 rounded-full" style="background:#A3A3A3;"></span>
+            </span>
+            <span class="text-[15px]" style="color:#525252;">Tour produit, checklists, pop-ups</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-[5px] w-4 h-4 rounded-full flex items-center justify-center shrink-0" style="background:#F0EFEE; border:1px solid #E7E5E4;">
+              <span class="w-1 h-1 rounded-full" style="background:#A3A3A3;"></span>
+            </span>
+            <span class="text-[15px]" style="color:#525252;">Mesure : completion rate</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-[5px] w-4 h-4 rounded-full flex items-center justify-center shrink-0" style="background:#F0EFEE; border:1px solid #E7E5E4;">
+              <span class="w-1 h-1 rounded-full" style="background:#A3A3A3;"></span>
+            </span>
+            <span class="text-[15px]" style="color:#525252;">Optimise l’interface</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-[5px] w-4 h-4 rounded-full flex items-center justify-center shrink-0" style="background:#F0EFEE; border:1px solid #E7E5E4;">
+              <span class="w-1 h-1 rounded-full" style="background:#A3A3A3;"></span>
+            </span>
+            <span class="text-[15px]" style="color:#525252;">Job d’un designer</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Right: activation -->
+      <div class="card" style="border:2px solid rgba(16,185,129,0.35);">
+        <p class="text-[12px] font-semibold mb-6" style="color:#10B981; letter-spacing:0.08em;">Système d’activation</p>
+        <ul class="flex flex-col gap-4">
+          <li class="flex items-start gap-3">
+            <span class="mt-[5px] w-4 h-4 rounded-full flex items-center justify-center shrink-0" style="background:rgba(16,185,129,0.12);">
+              <span class="w-1 h-1 rounded-full" style="background:#10B981;"></span>
+            </span>
+            <span class="text-[15px] font-medium" style="color:#0A0A0A;">Parcours vers la première valeur</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-[5px] w-4 h-4 rounded-full flex items-center justify-center shrink-0" style="background:rgba(16,185,129,0.12);">
+              <span class="w-1 h-1 rounded-full" style="background:#10B981;"></span>
+            </span>
+            <span class="text-[15px] font-medium" style="color:#0A0A0A;">Mesure : taux d’utilisateurs actifs</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-[5px] w-4 h-4 rounded-full flex items-center justify-center shrink-0" style="background:rgba(16,185,129,0.12);">
+              <span class="w-1 h-1 rounded-full" style="background:#10B981;"></span>
+            </span>
+            <span class="text-[15px] font-medium" style="color:#0A0A0A;">Optimise le time-to-value</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-[5px] w-4 h-4 rounded-full flex items-center justify-center shrink-0" style="background:rgba(16,185,129,0.12);">
+              <span class="w-1 h-1 rounded-full" style="background:#10B981;"></span>
+            </span>
+            <span class="text-[15px] font-medium" style="color:#0A0A0A;">Job d’un système (produit + data + comportement)</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Final phrase -->
+    <p class="text-center mt-16 font-semibold text-[20px]" style="color:#0A0A0A; letter-spacing:-0.01em;">
+      La valeur ne s’explique pas. Elle se vit.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     MÉTHODE — 5-step framework
+     ============================================================ -->
+<section id="methode" class="section" style="background:#FAFAF9;">
+  <div class="wrap">
+
+    <!-- Header -->
+    <div class="flex flex-col items-center text-center gap-4 mb-14">
+      <div class="badge">La méthode</div>
+      <h2 class="h2" style="color:#0A0A0A;">Notre framework d’activation en 5 étapes.</h2>
+      <p class="body" style="max-width:460px;">Chaque audit suit ce framework. Pas de variante. Pas d’improvisation.</p>
+    </div>
+
+    <!-- Desktop: horizontal -->
+    <div class="hidden lg:flex items-stretch">
+
+      <!-- Step 01 -->
+      <div class="card flex-1 rounded-2xl" style="padding:28px 24px;">
+        <p class="text-[10px] font-bold mb-4" style="color:#A3A3A3; letter-spacing:0.16em;">01</p>
+        <h3 class="text-[15px] font-semibold mb-2" style="color:#0A0A0A;">First Value</h3>
+        <p class="text-[13px]" style="color:#525252; line-height:1.55;">Le moment exact où votre user comprend la valeur</p>
+      </div>
+
+      <!-- Connector -->
+      <div class="flex items-center shrink-0 px-1.5">
+        <div class="w-5 h-px" style="background:#E7E5E4;"></div>
+        <div style="width:6px; height:6px; border-top:1px solid #E7E5E4; border-right:1px solid #E7E5E4; transform:rotate(45deg); margin-left:-3px;"></div>
+      </div>
+
+      <!-- Step 02 -->
+      <div class="card flex-1 rounded-2xl" style="padding:28px 24px;">
+        <p class="text-[10px] font-bold mb-4" style="color:#A3A3A3; letter-spacing:0.16em;">02</p>
+        <h3 class="text-[15px] font-semibold mb-2" style="color:#0A0A0A;">Current Journey</h3>
+        <p class="text-[13px]" style="color:#525252; line-height:1.55;">Le parcours réel, basé sur la data, pas le rêve</p>
+      </div>
+
+      <!-- Connector -->
+      <div class="flex items-center shrink-0 px-1.5">
+        <div class="w-5 h-px" style="background:#E7E5E4;"></div>
+        <div style="width:6px; height:6px; border-top:1px solid #E7E5E4; border-right:1px solid #E7E5E4; transform:rotate(45deg); margin-left:-3px;"></div>
+      </div>
+
+      <!-- Step 03 -->
+      <div class="card flex-1 rounded-2xl" style="padding:28px 24px;">
+        <p class="text-[10px] font-bold mb-4" style="color:#A3A3A3; letter-spacing:0.16em;">03</p>
+        <h3 class="text-[15px] font-semibold mb-2" style="color:#0A0A0A;">Activation Gaps</h3>
+        <p class="text-[13px]" style="color:#525252; line-height:1.55;">Les frictions qui tuent vos users</p>
+      </div>
+
+      <!-- Connector -->
+      <div class="flex items-center shrink-0 px-1.5">
+        <div class="w-5 h-px" style="background:#E7E5E4;"></div>
+        <div style="width:6px; height:6px; border-top:1px solid #E7E5E4; border-right:1px solid #E7E5E4; transform:rotate(45deg); margin-left:-3px;"></div>
+      </div>
+
+      <!-- Step 04 -->
+      <div class="card flex-1 rounded-2xl" style="padding:28px 24px;">
+        <p class="text-[10px] font-bold mb-4" style="color:#A3A3A3; letter-spacing:0.16em;">04</p>
+        <h3 class="text-[15px] font-semibold mb-2" style="color:#0A0A0A;">Activation Path</h3>
+        <p class="text-[13px]" style="color:#525252; line-height:1.55;">Le chemin simple, en 3 à 5 étapes</p>
+      </div>
+
+      <!-- Connector -->
+      <div class="flex items-center shrink-0 px-1.5">
+        <div class="w-5 h-px" style="background:#E7E5E4;"></div>
+        <div style="width:6px; height:6px; border-top:1px solid #E7E5E4; border-right:1px solid #E7E5E4; transform:rotate(45deg); margin-left:-3px;"></div>
+      </div>
+
+      <!-- Step 05 — accent -->
+      <div class="card flex-1 rounded-2xl" style="padding:28px 24px; border-color:rgba(16,185,129,0.3);">
+        <p class="text-[10px] font-bold mb-4" style="color:#10B981; letter-spacing:0.16em;">05</p>
+        <h3 class="text-[15px] font-semibold mb-2" style="color:#0A0A0A;">Activation Layer</h3>
+        <p class="text-[13px]" style="color:#525252; line-height:1.55;">Triggers et boucles qui rendent l’activation systémique</p>
+      </div>
+
+    </div>
+
+    <!-- Mobile: vertical -->
+    <div class="flex lg:hidden flex-col gap-3">
+
+      <div class="card">
+        <p class="text-[10px] font-bold mb-3" style="color:#A3A3A3; letter-spacing:0.16em;">01</p>
+        <h3 class="text-[17px] font-semibold mb-1.5" style="color:#0A0A0A;">First Value</h3>
+        <p class="text-[15px]" style="color:#525252; line-height:1.55;">Le moment exact où votre user comprend la valeur</p>
+      </div>
+
+      <div class="flex justify-center"><div class="w-px h-5" style="background:#E7E5E4;"></div></div>
+
+      <div class="card">
+        <p class="text-[10px] font-bold mb-3" style="color:#A3A3A3; letter-spacing:0.16em;">02</p>
+        <h3 class="text-[17px] font-semibold mb-1.5" style="color:#0A0A0A;">Current Journey</h3>
+        <p class="text-[15px]" style="color:#525252; line-height:1.55;">Le parcours réel, basé sur la data, pas le rêve</p>
+      </div>
+
+      <div class="flex justify-center"><div class="w-px h-5" style="background:#E7E5E4;"></div></div>
+
+      <div class="card">
+        <p class="text-[10px] font-bold mb-3" style="color:#A3A3A3; letter-spacing:0.16em;">03</p>
+        <h3 class="text-[17px] font-semibold mb-1.5" style="color:#0A0A0A;">Activation Gaps</h3>
+        <p class="text-[15px]" style="color:#525252; line-height:1.55;">Les frictions qui tuent vos users</p>
+      </div>
+
+      <div class="flex justify-center"><div class="w-px h-5" style="background:#E7E5E4;"></div></div>
+
+      <div class="card">
+        <p class="text-[10px] font-bold mb-3" style="color:#A3A3A3; letter-spacing:0.16em;">04</p>
+        <h3 class="text-[17px] font-semibold mb-1.5" style="color:#0A0A0A;">Activation Path</h3>
+        <p class="text-[15px]" style="color:#525252; line-height:1.55;">Le chemin simple, en 3 à 5 étapes</p>
+      </div>
+
+      <div class="flex justify-center"><div class="w-px h-5" style="background:#E7E5E4;"></div></div>
+
+      <div class="card" style="border-color:rgba(16,185,129,0.3);">
+        <p class="text-[10px] font-bold mb-3" style="color:#10B981; letter-spacing:0.16em;">05</p>
+        <h3 class="text-[17px] font-semibold mb-1.5" style="color:#0A0A0A;">Activation Layer</h3>
+        <p class="text-[15px]" style="color:#525252; line-height:1.55;">Triggers et boucles qui rendent l’activation systémique</p>
+      </div>
+
+    </div>
+
+    <!-- Caption -->
+    <p class="text-center mt-10 text-[14px]" style="color:#A3A3A3;">
+      C’est ce framework qu’on applique sur chaque audit.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     L’AUDIT — offre principale
+     ============================================================ -->
+<section id="tarif" class="section" style="background:#F5F5F4;">
+  <div class="wrap">
+
+    <!-- Header -->
+    <div class="flex flex-col items-center text-center gap-4 mb-14">
+      <div class="badge" style="background:rgba(16,185,129,0.08); border-color:rgba(16,185,129,0.3); color:#059669;">L’offre</div>
+      <h2 class="h2" style="color:#0A0A0A;">Ce que vous repartez avec.</h2>
+    </div>
+
+    <!-- Two columns -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+
+      <!-- Left: checklist -->
+      <div>
+        <p class="body mb-8">Chaque audit d’activation produit les mêmes livrables. Pas de surprise sur le scope.</p>
+
+        <ul class="flex flex-col gap-6">
+
+          <li class="flex items-start gap-4">
+            <div class="shrink-0 mt-0.5 w-5 h-5 rounded-full flex items-center justify-center" style="background:rgba(16,185,129,0.12);">
+              <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
+                <path d="M1 4L3.5 6.5L9 1" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <p class="font-semibold text-[16px]" style="color:#0A0A0A;">Audit du parcours réel post-signup</p>
+              <p class="text-[14px] mt-1" style="color:#525252;">Basé sur votre data, pas sur des suppositions</p>
+            </div>
+          </li>
+
+          <li class="flex items-start gap-4">
+            <div class="shrink-0 mt-0.5 w-5 h-5 rounded-full flex items-center justify-center" style="background:rgba(16,185,129,0.12);">
+              <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
+                <path d="M1 4L3.5 6.5L9 1" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <p class="font-semibold text-[16px]" style="color:#0A0A0A;">Cartographie des activation gaps prioritaires</p>
+              <p class="text-[14px] mt-1" style="color:#525252;">Les frictions triées par impact business</p>
+            </div>
+          </li>
+
+          <li class="flex items-start gap-4">
+            <div class="shrink-0 mt-0.5 w-5 h-5 rounded-full flex items-center justify-center" style="background:rgba(16,185,129,0.12);">
+              <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
+                <path d="M1 4L3.5 6.5L9 1" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <p class="font-semibold text-[16px]" style="color:#0A0A0A;">Activation path recommandé (3 à 5 étapes)</p>
+              <p class="text-[14px] mt-1" style="color:#525252;">Un chemin clair et directement implémentable</p>
+            </div>
+          </li>
+
+          <li class="flex items-start gap-4">
+            <div class="shrink-0 mt-0.5 w-5 h-5 rounded-full flex items-center justify-center" style="background:rgba(16,185,129,0.12);">
+              <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
+                <path d="M1 4L3.5 6.5L9 1" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <p class="font-semibold text-[16px]" style="color:#0A0A0A;">Plan d’implémentation priorisé par impact business</p>
+              <p class="text-[14px] mt-1" style="color:#525252;">Roadmap prête à transmettre à votre équipe</p>
+            </div>
+          </li>
+
+          <li class="flex items-start gap-4">
+            <div class="shrink-0 mt-0.5 w-5 h-5 rounded-full flex items-center justify-center" style="background:rgba(16,185,129,0.12);">
+              <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
+                <path d="M1 4L3.5 6.5L9 1" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <p class="font-semibold text-[16px]" style="color:#0A0A0A;">Présentation live (60 min) avec votre équipe</p>
+              <p class="text-[14px] mt-1" style="color:#525252;">On présente, on répond aux questions, on aligne</p>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+
+      <!-- Right: pricing card -->
+      <div class="card lg:sticky lg:top-28">
+
+        <div class="mb-6">
+          <p class="text-[12px] font-medium mb-1" style="color:#A3A3A3;">Offre</p>
+          <h3 class="text-[22px] font-semibold" style="color:#0A0A0A; letter-spacing:-0.02em;">Audit d’activation</h3>
+        </div>
+
+        <div class="pb-6 mb-6" style="border-bottom:1px solid #E7E5E4;">
+          <p style="font-size:42px; font-weight:700; color:#0A0A0A; letter-spacing:-0.04em; line-height:1; font-variant-numeric:tabular-nums;">À partir de 1&nbsp;500&nbsp;€</p>
+          <span class="inline-flex items-center gap-1.5 mt-3 px-3 py-1 rounded-full text-[12px] font-semibold"
+                style="background:rgba(16,185,129,0.1); color:#059669; border:1px solid rgba(16,185,129,0.25);">
+            Tarif lancement&nbsp;· 10&nbsp;premiers clients
+          </span>
+        </div>
+
+        <div class="flex flex-col gap-3.5 mb-8">
+          <div class="flex items-center justify-between">
+            <span class="text-[15px]" style="color:#525252;">Durée</span>
+            <span class="text-[15px] font-medium" style="color:#0A0A0A;">2 semaines</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-[15px]" style="color:#525252;">Format</span>
+            <span class="text-[15px] font-medium" style="color:#0A0A0A;">100% remote</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-[15px]" style="color:#525252;">Prérequis</span>
+            <span class="text-[15px] font-medium" style="color:#0A0A0A;">10+ users payants</span>
+          </div>
+        </div>
+
+        <a href="https://cal.com/kevin-silve/30min" target="_blank" rel="noopener"
+           class="block w-full text-center bg-[#0A0A0A] text-white rounded-full text-[15px] font-medium hover:opacity-90 transition-opacity"
+           style="padding:14px 32px; letter-spacing:0.005em;"
+           aria-label="Réserver un diagnostic gratuit">
+          Réserver un diagnostic →
+        </a>
+        <p class="text-center mt-3 text-[13px]" style="color:#A3A3A3;">30&nbsp;min&nbsp;· Gratuit&nbsp;· Sans engagement</p>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     QUI — l’humain derrière
+     ============================================================ -->
+<section class="section" style="background:#FAFAF9;">
+  <div class="wrap">
+
+    <div class="flex justify-center mb-14">
+      <div class="badge">Qui</div>
+    </div>
+
+    <div class="flex flex-col md:flex-row items-center md:items-start gap-10 max-w-2xl mx-auto">
+
+      <!-- Photo Kevin Silve -->
+      <div class="shrink-0">
+        <img src="kevin.png"
+             alt="Kevin Silve, fondateur de Nea Labs"
+             loading="lazy"
+             width="128" height="128"
+             class="w-32 h-32 rounded-full object-cover"
+             style="border:1px solid #E7E5E4;">
+      </div>
+
+      <!-- Bio -->
+      <div class="flex flex-col gap-4 text-center md:text-left">
+        <h3 class="text-[21px] font-semibold" style="color:#0A0A0A; letter-spacing:-0.02em;"><span translate="no">Kevin&nbsp;Silve</span>&nbsp;· Fondateur, <span translate="no">Nea&nbsp;Labs</span></h3>
+        <p class="body" style="font-size:16px;">
+          Ancien Product Manager &amp; Designer durant plus de 6&nbsp;ans. J’ai bossé sur une trentaine de produits SaaS B2B
+          et j’ai vu le même schéma se répéter&nbsp;: des interfaces propres, des onboardings travaillés,
+          et des utilisateurs qui ne reviennent jamais.
+        </p>
+        <p class="body" style="font-size:16px;">
+          Le problème n’était pas le design. C’était l’absence de système d’activation.
+        </p>
+        <p class="body" style="font-size:16px;">
+          Aujourd’hui, je partage ce que j’apprends auprès de founders SaaS sur
+          <span translate="no">YouTube</span> (+200&nbsp;abonnés) et <span translate="no">LinkedIn</span> (+2&nbsp;000&nbsp;abonnés).
+          Avec <span translate="no">Nea&nbsp;Labs</span>, je transforme ces apprentissages en audits actionnables.
+        </p>
+        <div class="flex items-center gap-3 justify-center md:justify-start mt-1">
+          <a href="https://www.linkedin.com/in/kevin-silve/" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-[14px] font-medium text-white hover:opacity-90 transition-opacity"
+             style="background:#0A66C2;"
+             aria-label="Profil LinkedIn de Kevin Silve">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+            LinkedIn
+          </a>
+          <a href="https://www.youtube.com/@kevin-silve" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-[14px] font-medium text-white hover:opacity-90 transition-opacity"
+             style="background:#FF0000;"
+             aria-label="Chaîne YouTube de Kevin Silve">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+            YouTube
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FAQ — accordion
+     ============================================================ -->
+<section id="faq" class="section" style="background:#F5F5F4;">
+  <div class="wrap">
+
+    <!-- Header -->
+    <div class="flex flex-col items-center text-center gap-4 mb-14">
+      <div class="badge">FAQ</div>
+      <h2 class="h2" style="color:#0A0A0A;">Questions fréquentes.</h2>
+    </div>
+
+    <!-- Accordion -->
+    <div class="max-w-2xl mx-auto flex flex-col gap-3"
+         x-data="{ open: null }">
+
+      <!-- Q1 -->
+      <div class="card" style="padding:0; overflow:hidden;">
+        <button @click="open = open === 0 ? null : 0"
+                class="w-full flex items-center justify-between text-left px-7 py-5 hover:bg-[#FAFAF9] transition-colors"
+                :aria-expanded="open === 0">
+          <span class="text-[16px] font-medium pr-4" style="color:#0A0A0A;">Pour quel type de SaaS ?</span>
+          <svg class="shrink-0 transition-transform duration-200" :class="{'rotate-45': open === 0}"
+               width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M9 3v12M3 9h12" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div x-show="open === 0" x-collapse class="px-7 pb-6">
+          <p class="text-[15px]" style="color:#525252; line-height:1.65;">
+            B2B SaaS post-PMF avec au moins 10 users payants et de la data utilisateur de base.
+          </p>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="card" style="padding:0; overflow:hidden;">
+        <button @click="open = open === 1 ? null : 1"
+                class="w-full flex items-center justify-between text-left px-7 py-5 hover:bg-[#FAFAF9] transition-colors"
+                :aria-expanded="open === 1">
+          <span class="text-[16px] font-medium pr-4" style="color:#0A0A0A;">Combien ça coûte ?</span>
+          <svg class="shrink-0 transition-transform duration-200" :class="{'rotate-45': open === 1}"
+               width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M9 3v12M3 9h12" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div x-show="open === 1" x-collapse class="px-7 pb-6">
+          <p class="text-[15px]" style="color:#525252; line-height:1.65;">
+            Audit à partir de 1&nbsp;500&nbsp;€ (tarif lancement). Devis précis envoyé après le diagnostic gratuit.
+          </p>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="card" style="padding:0; overflow:hidden;">
+        <button @click="open = open === 2 ? null : 2"
+                class="w-full flex items-center justify-between text-left px-7 py-5 hover:bg-[#FAFAF9] transition-colors"
+                :aria-expanded="open === 2">
+          <span class="text-[16px] font-medium pr-4" style="color:#0A0A0A;">Combien de temps ?</span>
+          <svg class="shrink-0 transition-transform duration-200" :class="{'rotate-45': open === 2}"
+               width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M9 3v12M3 9h12" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div x-show="open === 2" x-collapse class="px-7 pb-6">
+          <p class="text-[15px]" style="color:#525252; line-height:1.65;">
+            2 semaines, pas plus. C’est court par design : un audit qui s’éternise est un audit qui ne sera jamais appliqué.
+          </p>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="card" style="padding:0; overflow:hidden;">
+        <button @click="open = open === 3 ? null : 3"
+                class="w-full flex items-center justify-between text-left px-7 py-5 hover:bg-[#FAFAF9] transition-colors"
+                :aria-expanded="open === 3">
+          <span class="text-[16px] font-medium pr-4" style="color:#0A0A0A;">C’est pas trop tôt pour moi&nbsp;? J’ai seulement une dizaine de users payants.</span>
+          <svg class="shrink-0 transition-transform duration-200" :class="{'rotate-45': open === 3}"
+               width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M9 3v12M3 9h12" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div x-show="open === 3" x-collapse class="px-7 pb-6">
+          <p class="text-[15px]" style="color:#525252; line-height:1.65;">
+            Non. C’est même le moment idéal. À 10–50&nbsp;users payants, vos patterns d’activation sont visibles
+            mais pas encore figés. Plus vous attendez, plus les frictions s’enracinent dans votre produit
+            et dans la tête de vos users.
+          </p>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="card" style="padding:0; overflow:hidden;">
+        <button @click="open = open === 4 ? null : 4"
+                class="w-full flex items-center justify-between text-left px-7 py-5 hover:bg-[#FAFAF9] transition-colors"
+                :aria-expanded="open === 4">
+          <span class="text-[16px] font-medium pr-4" style="color:#0A0A0A;">Pourquoi pas juste utiliser <span translate="no">Userpilot</span>, <span translate="no">Pendo</span> ou <span translate="no">Hyperengage</span>&nbsp;?</span>
+          <svg class="shrink-0 transition-transform duration-200" :class="{'rotate-45': open === 4}"
+               width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M9 3v12M3 9h12" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div x-show="open === 4" x-collapse class="px-7 pb-6">
+          <p class="text-[15px]" style="color:#525252; line-height:1.65;">
+            Ces outils <em>exécutent</em> un système d’activation. Ils ne le construisent pas. Avant d’investir
+            dans la stack, vous avez besoin de savoir <strong>ce qu’il faut activer</strong>, <strong>dans quel ordre</strong>,
+            et <strong>sur quel signal</strong>. C’est exactement ce qu’on livre.
+          </p>
+        </div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="card" style="padding:0; overflow:hidden;">
+        <button @click="open = open === 5 ? null : 5"
+                class="w-full flex items-center justify-between text-left px-7 py-5 hover:bg-[#FAFAF9] transition-colors"
+                :aria-expanded="open === 5">
+          <span class="text-[16px] font-medium pr-4" style="color:#0A0A0A;">Et l’adoption alors&nbsp;? C’est pas ça le vrai but&nbsp;?</span>
+          <svg class="shrink-0 transition-transform duration-200" :class="{'rotate-45': open === 5}"
+               width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M9 3v12M3 9h12" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div x-show="open === 5" x-collapse class="px-7 pb-6">
+          <p class="text-[15px]" style="color:#525252; line-height:1.65;">
+            Oui. L’adoption, c’est le but final. Mais elle ne se produit pas par magie&nbsp;: elle dépend
+            entièrement de la qualité de l’activation. Sans activation solide, vous pouvez investir dans
+            l’adoption pendant des mois sans résultat. On commence par le maillon manquant, puis on construit la suite.
+          </p>
+        </div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="card" style="padding:0; overflow:hidden;">
+        <button @click="open = open === 6 ? null : 6"
+                class="w-full flex items-center justify-between text-left px-7 py-5 hover:bg-[#FAFAF9] transition-colors"
+                :aria-expanded="open === 6">
+          <span class="text-[16px] font-medium pr-4" style="color:#0A0A0A;">Vous êtes designer, vous pouvez vraiment m’aider sur l’activation&nbsp;?</span>
+          <svg class="shrink-0 transition-transform duration-200" :class="{'rotate-45': open === 6}"
+               width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M9 3v12M3 9h12" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div x-show="open === 6" x-collapse class="px-7 pb-6">
+          <p class="text-[15px]" style="color:#525252; line-height:1.65;">
+            L’activation, ce n’est pas que de la data. C’est l’intersection entre comportement utilisateur,
+            parcours produit et moment de valeur. Mon background design + analyse comportementale est exactement
+            ce qu’il faut pour voir ce que la data seule ne montre pas.
+          </p>
+        </div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="card" style="padding:0; overflow:hidden;">
+        <button @click="open = open === 7 ? null : 7"
+                class="w-full flex items-center justify-between text-left px-7 py-5 hover:bg-[#FAFAF9] transition-colors"
+                :aria-expanded="open === 7">
+          <span class="text-[16px] font-medium pr-4" style="color:#0A0A0A;">Et si vous ne pouvez pas m’aider&nbsp;?</span>
+          <svg class="shrink-0 transition-transform duration-200" :class="{'rotate-45': open === 7}"
+               width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M9 3v12M3 9h12" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div x-show="open === 7" x-collapse class="px-7 pb-6">
+          <p class="text-[15px]" style="color:#525252; line-height:1.65;">
+            On vous le dit en diagnostic. Pas de mission vendue pour rien.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CTA FINAL — dark
+     ============================================================ -->
+<section id="diagnostic" class="section dark-surface" style="background:#0A0A0A;">
+  <div class="wrap flex flex-col items-center text-center gap-8">
+
+    <h2 class="h2" style="color:#fff; max-width:680px;">
+      Vous pouvez continuer à deviner. Ou découvrir.
+    </h2>
+
+    <p class="text-[18px]" style="color:rgba(255,255,255,0.55); font-weight:400; max-width:640px; line-height:1.55;">
+      30&nbsp;minutes pour comprendre où votre activation perd vos users payants.
+      Gratuit, sans engagement, et utile même si on ne travaille pas ensemble derrière.
+    </p>
+
+    <!-- Double pill CTA — dark variant -->
+    <div class="inline-flex items-center gap-1.5 rounded-full p-1.5"
+         style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1); box-shadow:0 0 40px rgba(16,185,129,0.18);">
+      <span class="px-5 py-3 text-white text-[15px] font-medium select-none">Commencer</span>
+      <a href="https://cal.com/kevin-silve/30min" target="_blank" rel="noopener"
+         class="bg-[#10B981] text-white rounded-full text-[15px] font-medium hover:opacity-90 transition-opacity"
+         style="padding:14px 28px; letter-spacing:0.005em;"
+         aria-label="Réserver un diagnostic gratuit de 30 minutes">
+        Diagnostic gratuit →
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="dark-surface" style="background:#0A0A0A; border-top:1px solid rgba(255,255,255,0.07); padding:28px 0; padding-bottom:max(28px, env(safe-area-inset-bottom));">
+  <div class="wrap flex flex-col sm:flex-row items-center justify-between gap-4">
+
+    <div class="flex items-center gap-2">
+      <span class="text-[13px] font-semibold" style="color:rgba(255,255,255,0.9); letter-spacing:0.14em;" translate="no">NEA LABS</span>
+      <span class="text-[14px]" style="color:rgba(255,255,255,0.3);">·&nbsp;©&nbsp;<span id="year">2026</span></span>
+    </div>
+
+    <nav aria-label="Liens footer" class="flex items-center gap-5">
+      <a href="https://www.linkedin.com/in/kevin-silve/" target="_blank" rel="noopener"
+         class="footer-social inline-flex items-center gap-1.5 text-[14px]"
+         aria-label="LinkedIn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#0A66C2" aria-hidden="true">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+        LinkedIn
+      </a>
+      <a href="https://www.youtube.com/@kevin-silve" target="_blank" rel="noopener"
+         class="footer-social inline-flex items-center gap-1.5 text-[14px]"
+         aria-label="YouTube">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#FF0000" aria-hidden="true">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+        YouTube
+      </a>
+      <a href="/mentions-legales" class="text-[14px] hover:text-white transition-colors" style="color:rgba(255,255,255,0.45);">Mentions légales</a>
+    </nav>
+
+  </div>
+</footer>
+
+<!-- Dynamic year -->
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+
+</body>
+</html>
