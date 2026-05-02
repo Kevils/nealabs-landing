@@ -10,8 +10,8 @@
   <meta property="og:title" content="Nea Labs — Activation SaaS">
   <meta property="og:description" content="Pour les SaaS post-PMF avec leurs premiers users payants. On identifie pourquoi ils ne reviennent pas — et on construit le parcours qui les rend actifs.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://nealabs.studio">
-  <meta property="og:image" content="https://nealabs.studio/og-image.jpg">
+  <meta property="og:url" content="https://nealabs.fr">
+  <meta property="og:image" content="https://nealabs.fr/og-image.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Nea Labs — Activation SaaS">
   <meta name="twitter:description" content="Pour les SaaS post-PMF avec leurs premiers users payants.">
@@ -50,13 +50,13 @@
   </script>
 
   Plausible Analytics:
-  <script defer data-domain="nealabs.studio" src="https://plausible.io/js/script.js"></script>
+  <script defer data-domain="nealabs.fr" src="https://plausible.io/js/script.js"></script>
   -->
 
   <!-- Google Fonts — Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -122,6 +122,114 @@
     /* Dark sections — color-scheme hint for native UI (scrollbars, autofill) */
     .dark-surface { color-scheme: dark; }
 
+    /* Mono utility — labels techniques (inspiration FlowOps) */
+    .mono {
+      font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+      font-feature-settings: 'tnum' 1, 'zero' 1;
+    }
+    .mono-label {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: #A3A3A3;
+      text-transform: uppercase;
+    }
+
+    /* Card depth — subtle inner highlight + bottom shadow on hover */
+    .card-elevated {
+      position: relative;
+      transition: transform 240ms cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 240ms cubic-bezier(0.4, 0, 0.2, 1),
+                  border-color 240ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card-elevated::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+    }
+    .card-elevated:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 32px -12px rgba(10,10,10,0.12), 0 4px 12px -4px rgba(10,10,10,0.06);
+      border-color: #D6D3D1;
+    }
+
+    /* Icon container */
+    .icon-tile {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: #FAFAF9;
+      border: 1px solid #E7E5E4;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #0A0A0A;
+      transition: background 240ms ease, color 240ms ease, transform 240ms ease;
+    }
+    .card-elevated:hover .icon-tile {
+      background: #0A0A0A;
+      color: #ffffff;
+      transform: rotate(-2deg);
+    }
+    .icon-tile-accent {
+      background: rgba(16,185,129,0.08);
+      border-color: rgba(16,185,129,0.25);
+      color: #059669;
+    }
+
+    /* Subtle grid background — pour sections d'emphase */
+    .grid-bg {
+      background-image:
+        linear-gradient(to right, rgba(10,10,10,0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(10,10,10,0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .grid-bg-dark {
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 600ms cubic-bezier(0.4, 0, 0.2, 1), transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-stagger > * {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 600ms cubic-bezier(0.4, 0, 0.2, 1), transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0ms; }
+    .reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 80ms; }
+    .reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 160ms; }
+    .reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 240ms; }
+    .reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 320ms; }
+    .reveal-stagger.is-visible > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* CTA arrow micro-interaction */
+    .cta-arrow {
+      display: inline-block;
+      transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    a:hover .cta-arrow,
+    a:focus-visible .cta-arrow {
+      transform: translateX(3px);
+    }
+
     /* Reduced motion */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -129,6 +237,10 @@
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
+      }
+      .reveal, .reveal-stagger > * {
+        opacity: 1 !important;
+        transform: none !important;
       }
     }
 
@@ -253,10 +365,10 @@
              style="border:1px solid #E7E5E4; box-shadow:0 0 40px rgba(16,185,129,0.22);">
           <span class="px-5 py-3 text-[#0A0A0A] text-[15px] font-medium select-none">Commencer</span>
           <a href="https://cal.com/kevin-silve/30min" target="_blank" rel="noopener"
-             class="bg-[#10B981] text-white rounded-full text-[15px] font-medium hover:bg-[#059669] transition-opacity hover:opacity-90"
+             class="group bg-[#10B981] text-white rounded-full text-[15px] font-medium hover:bg-[#059669] transition-opacity hover:opacity-90"
              style="padding:14px 28px; letter-spacing:0.005em;"
              aria-label="Auditer mon activation — réserver un diagnostic gratuit">
-            Auditer mon activation →
+            Auditer mon activation <span class="cta-arrow">→</span>
           </a>
         </div>
 
@@ -264,6 +376,21 @@
 
       <!-- Micro-text -->
       <p class="text-[13px]" style="color:#A3A3A3; letter-spacing:0.01em;">30&nbsp;min&nbsp;· Sans engagement&nbsp;· 100%&nbsp;remote</p>
+
+      <!-- Social proof line -->
+      <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mt-2" aria-label="Preuves sociales">
+        <span class="inline-flex items-center gap-1.5 text-[12px]" style="color:#737373;">
+          <span class="mono" style="color:#0A0A0A; font-weight:600;">+30</span> produits SaaS audités
+        </span>
+        <span class="hidden sm:inline-block w-px h-3" style="background:#E7E5E4;" aria-hidden="true"></span>
+        <span class="inline-flex items-center gap-1.5 text-[12px]" style="color:#737373;">
+          <span class="mono" style="color:#0A0A0A; font-weight:600;">6 ans</span> d’expérience produit
+        </span>
+        <span class="hidden sm:inline-block w-px h-3" style="background:#E7E5E4;" aria-hidden="true"></span>
+        <span class="inline-flex items-center gap-1.5 text-[12px]" style="color:#737373;">
+          <span class="mono" style="color:#0A0A0A; font-weight:600;">+2k</span> founders dans la communauté
+        </span>
+      </div>
     </div>
 
     <!-- Decorative tab selector -->
@@ -284,12 +411,34 @@
 
 
 <!-- ============================================================
+     LOGOS — bande clients / partenaires
+     [MASQUÉE — à réactiver dès que les vrais logos sont prêts.
+      Remplacer les <span> par des <img src="logos/xxx.svg"> ou SVG inline.]
+     ============================================================ -->
+<section hidden aria-label="Ils m’ont fait confiance" class="py-12 reveal" style="background:#F5F5F4; border-top:1px solid #E7E5E4; border-bottom:1px solid #E7E5E4;">
+  <div class="wrap">
+    <p class="mono-label text-center mb-6">ILS M’ONT FAIT CONFIANCE</p>
+    <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-5 opacity-60">
+      <!-- TODO: remplacer par les vrais logos clients (SVG inline ou <img src="logos/xxx.svg" />) -->
+      <span class="text-[18px] font-bold tracking-tight" style="color:#737373;">Acme</span>
+      <span class="text-[18px] font-semibold" style="color:#737373; letter-spacing:-0.02em;">Lumen.io</span>
+      <span class="text-[16px] font-bold uppercase" style="color:#737373; letter-spacing:0.18em;">North</span>
+      <span class="text-[18px] font-semibold italic" style="color:#737373;">Stride</span>
+      <span class="text-[18px] font-bold" style="color:#737373; font-family:'JetBrains Mono', monospace;">/proto</span>
+      <span class="text-[18px] font-semibold" style="color:#737373;">Klarity</span>
+      <span class="text-[18px] font-bold" style="color:#737373;">Nexa</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
      CHAÎNON MANQUANT — entre acquisition et adoption
      ============================================================ -->
 <section class="section" style="background:#F5F5F4; padding-top:80px; padding-bottom:80px;">
   <div class="wrap">
 
-    <div class="flex flex-col items-center text-center gap-4 mb-12">
+    <div class="flex flex-col items-center text-center gap-4 mb-12 reveal">
       <div class="badge">Le chaînon manquant</div>
       <h2 class="h2" style="max-width:760px; color:#0A0A0A;">
         Vous ne perdez pas vos users à l’acquisition. Ni à l’adoption. Entre les deux.
@@ -299,33 +448,84 @@
       </p>
     </div>
 
-    <!-- Visual: 3 steps horizontaux -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-4xl mx-auto items-stretch">
+    <!-- Pipeline stages — display number style -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-5xl mx-auto items-stretch reveal">
 
-      <!-- Step 1: Acquisition (faded) -->
-      <div class="card flex flex-col" style="padding:24px; background:#FAFAF9; opacity:0.7;">
-        <p class="text-[11px] font-bold mb-3" style="color:#A3A3A3; letter-spacing:0.16em;">ÉTAPE 1</p>
-        <h3 class="text-[18px] font-semibold mb-2" style="color:#0A0A0A;">Acquisition</h3>
-        <p class="text-[14px]" style="color:#525252; line-height:1.55;">L’utilisateur découvre, s’inscrit, paye. La plupart des founders maîtrisent ça.</p>
+      <!-- Step 1: Acquisition -->
+      <div class="card relative overflow-hidden flex flex-col" style="padding:0; background:#FAFAF9;">
+
+        <!-- Display number + tag aligned -->
+        <div class="px-7 pt-6 pb-4 flex items-center justify-between relative">
+          <span class="mono" style="font-size:64px; font-weight:600; line-height:1; color:#0A0A0A; letter-spacing:-0.05em;">01</span>
+          <span class="mono inline-flex items-center gap-1 px-2 py-0.5 rounded text-[9px] font-semibold uppercase" style="background:rgba(10,10,10,0.05); color:#737373; letter-spacing:0.1em;">Maîtrisé</span>
+        </div>
+
+        <!-- Title + description -->
+        <div class="px-7 pb-6 flex-1 flex flex-col">
+          <h3 class="text-[18px] font-semibold mb-2" style="color:#0A0A0A; letter-spacing:-0.01em;">Acquisition</h3>
+          <p class="text-[14px] flex-1" style="color:#525252; line-height:1.55;">L’utilisateur découvre, s’inscrit, paye. La plupart des founders maîtrisent ça.</p>
+        </div>
+
+        <!-- Footer: throughput indicator -->
+        <div class="px-7 py-3 flex items-center justify-between mono" style="border-top:1px solid #E7E5E4; background:#F5F5F4; font-size:11px; color:#737373;">
+          <span>→ Sortie vers activation</span>
+          <span class="font-semibold" style="color:#0A0A0A;">100%</span>
+        </div>
       </div>
 
-      <!-- Step 2: Activation (highlighted) -->
-      <div class="card flex flex-col" style="padding:24px; border:2px solid rgba(16,185,129,0.4); box-shadow:0 0 30px rgba(16,185,129,0.15);">
-        <p class="text-[11px] font-bold mb-3" style="color:#10B981; letter-spacing:0.16em;">ÉTAPE 2&nbsp;· LE TROU NOIR</p>
-        <h3 class="text-[18px] font-semibold mb-2" style="color:#0A0A0A;">Activation</h3>
-        <p class="text-[14px]" style="color:#525252; line-height:1.55;">L’utilisateur ressent la valeur pour la première fois. C’est ici que la majorité des SaaS perdent leurs users payants.</p>
+      <!-- Step 2: Activation (highlighted, central) -->
+      <div class="card card-elevated relative overflow-hidden flex flex-col" style="padding:0; border:2px solid rgba(16,185,129,0.45); box-shadow:0 0 40px rgba(16,185,129,0.18), 0 8px 24px -8px rgba(10,10,10,0.08); transform:translateY(-6px);">
+
+        <!-- Display number + tag aligned -->
+        <div class="px-7 pt-6 pb-4 flex items-center justify-between relative">
+          <span class="mono" style="font-size:64px; font-weight:700; line-height:1; color:#10B981; letter-spacing:-0.05em;">02</span>
+          <span class="mono inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[9px] font-semibold uppercase" style="background:rgba(10,10,10,0.06); color:#0A0A0A; letter-spacing:0.1em; border:1px solid rgba(10,10,10,0.12);">
+            <span class="relative flex w-1 h-1" aria-hidden="true">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60" style="background:#0A0A0A;"></span>
+              <span class="relative inline-flex rounded-full w-1 h-1" style="background:#0A0A0A;"></span>
+            </span>
+            Bottleneck
+          </span>
+        </div>
+
+        <!-- Title + description -->
+        <div class="px-7 pb-6 flex-1 flex flex-col">
+          <h3 class="text-[18px] font-semibold mb-2" style="color:#0A0A0A; letter-spacing:-0.01em;">Activation</h3>
+          <p class="text-[14px] flex-1" style="color:#525252; line-height:1.55;">L’utilisateur ressent la valeur pour la première fois. C’est ici que la majorité des SaaS perdent leurs users payants.</p>
+        </div>
+
+        <!-- Footer: throughput indicator (drop) -->
+        <div class="px-7 py-3 flex items-center justify-between mono" style="border-top:1px solid rgba(16,185,129,0.2); background:rgba(16,185,129,0.04); font-size:11px; color:#737373;">
+          <span>↗ Conversion vers adoption</span>
+          <span class="font-semibold" style="color:#10B981;">~30%</span>
+        </div>
       </div>
 
-      <!-- Step 3: Adoption (faded) -->
-      <div class="card flex flex-col" style="padding:24px; background:#FAFAF9; opacity:0.7;">
-        <p class="text-[11px] font-bold mb-3" style="color:#A3A3A3; letter-spacing:0.16em;">ÉTAPE 3</p>
-        <h3 class="text-[18px] font-semibold mb-2" style="color:#0A0A0A;">Adoption</h3>
-        <p class="text-[14px]" style="color:#525252; line-height:1.55;">L’utilisateur intègre le produit à son quotidien. Le MRR devient récurrent. C’est le but final.</p>
+      <!-- Step 3: Adoption -->
+      <div class="card relative overflow-hidden flex flex-col" style="padding:0; background:#FAFAF9;">
+
+        <!-- Display number + tag aligned -->
+        <div class="px-7 pt-6 pb-4 flex items-center justify-between relative">
+          <span class="mono" style="font-size:64px; font-weight:600; line-height:1; color:#0A0A0A; letter-spacing:-0.05em;">03</span>
+          <span class="mono inline-flex items-center gap-1 px-2 py-0.5 rounded text-[9px] font-semibold uppercase" style="background:rgba(10,10,10,0.05); color:#737373; letter-spacing:0.1em;">Objectif</span>
+        </div>
+
+        <!-- Title + description -->
+        <div class="px-7 pb-6 flex-1 flex flex-col">
+          <h3 class="text-[18px] font-semibold mb-2" style="color:#0A0A0A; letter-spacing:-0.01em;">Adoption</h3>
+          <p class="text-[14px] flex-1" style="color:#525252; line-height:1.55;">L’utilisateur intègre le produit à son quotidien. Le MRR devient récurrent. C’est le but final.</p>
+        </div>
+
+        <!-- Footer: outcome -->
+        <div class="px-7 py-3 flex items-center justify-between mono" style="border-top:1px solid #E7E5E4; background:#F5F5F4; font-size:11px; color:#737373;">
+          <span>✓ MRR récurrent</span>
+          <span class="font-semibold" style="color:#0A0A0A;">Goal</span>
+        </div>
       </div>
 
     </div>
 
-    <p class="text-center mt-12 font-medium" style="font-size:18px; color:#0A0A0A; max-width:680px; margin-left:auto; margin-right:auto;">
+    <p class="text-center mt-12" style="font-size:clamp(17px,2vw,22px); font-weight:500; color:#737373; line-height:1.55; max-width:760px; margin-left:auto; margin-right:auto; text-wrap:balance;">
       Notre job&nbsp;: construire le pont qui transforme un user payant en user adopté.
     </p>
 
@@ -340,48 +540,120 @@
   <div class="wrap">
 
     <!-- Header -->
-    <div class="flex flex-col items-center text-center gap-4 mb-14">
+    <div class="flex flex-col items-center text-center gap-4 mb-14 reveal">
       <div class="badge">Le constat</div>
       <h2 class="h2" style="color:#0A0A0A;">Si vous reconnaissez ça, on peut s’aider.</h2>
     </div>
 
-    <!-- Cards grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+    <!-- Cards grid — style "deliverable preview" -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-5xl mx-auto reveal-stagger items-stretch">
 
-      <div class="card">
-        <p class="text-[11px] font-semibold mb-5 tracking-widest" style="color:#A3A3A3; letter-spacing:0.12em;">01</p>
-        <h3 class="text-[19px] font-semibold mb-3 leading-snug" style="color:#0A0A0A; letter-spacing:-0.01em;">
+      <!-- CASE 01 -->
+      <div class="card card-elevated flex flex-col" style="padding:22px; transform:rotate(-1deg); transform-origin:center;">
+        <div class="flex items-center justify-between mb-5">
+          <span class="mono-label" style="color:#10B981;">CASE 01</span>
+          <div class="flex gap-1" aria-hidden="true">
+            <span class="w-1.5 h-1.5 rounded-full" style="background:#10B981;"></span>
+            <span class="w-1.5 h-1.5 rounded-full" style="background:#E7E5E4;"></span>
+            <span class="w-1.5 h-1.5 rounded-full" style="background:#E7E5E4;"></span>
+          </div>
+        </div>
+        <h3 class="text-[17px] font-semibold mb-3 leading-snug" style="color:#0A0A0A; letter-spacing:-0.01em;">
           Vous signez des clients mais ils ne reviennent jamais.
         </h3>
-        <p class="text-[15px]" style="color:#525252; line-height:1.6;">
+        <p class="text-[14px] mb-5 flex-1" style="color:#525252; line-height:1.55;">
           Votre acquisition fonctionne. Votre produit convainc à la démo. Puis silence, plus de nouvelles.
         </p>
+        <!-- Mock cohort dropoff (green → red gradient) -->
+        <div class="pt-4" style="border-top:1px solid #E7E5E4;" aria-hidden="true">
+          <div class="flex items-end justify-between gap-1.5 h-14">
+            <div class="flex-1 rounded-t-sm" style="background:#10B981; height:100%;"></div>
+            <div class="flex-1 rounded-t-sm" style="background:#10B981; opacity:0.65; height:74%;"></div>
+            <div class="flex-1 rounded-t-sm" style="background:#f59e0b; height:40%;"></div>
+            <div class="flex-1 rounded-t-sm" style="background:#ef4444; opacity:0.7; height:20%;"></div>
+            <div class="flex-1 rounded-t-sm" style="background:#ef4444; height:8%;"></div>
+          </div>
+          <div class="flex items-center justify-between mt-2 mono" style="font-size:9px; color:#737373;">
+            <span>J0</span><span>J3</span><span>J7</span><span>J14</span><span style="color:#ef4444;">J30</span>
+          </div>
+        </div>
       </div>
 
-      <div class="card">
-        <p class="text-[11px] font-semibold mb-5 tracking-widest" style="color:#A3A3A3; letter-spacing:0.12em;">02</p>
-        <h3 class="text-[19px] font-semibold mb-3 leading-snug" style="color:#0A0A0A; letter-spacing:-0.01em;">
+      <!-- CASE 02 (centrale, surélevée) -->
+      <div class="card card-elevated flex flex-col" style="padding:22px; transform:translateY(-8px); box-shadow:0 12px 32px -12px rgba(10,10,10,0.15); position:relative; z-index:2;">
+        <div class="flex items-center justify-between mb-5">
+          <span class="mono-label" style="color:#10B981;">CASE 02</span>
+          <div class="flex gap-1" aria-hidden="true">
+            <span class="w-1.5 h-1.5 rounded-full" style="background:#E7E5E4;"></span>
+            <span class="w-1.5 h-1.5 rounded-full" style="background:#10B981;"></span>
+            <span class="w-1.5 h-1.5 rounded-full" style="background:#E7E5E4;"></span>
+          </div>
+        </div>
+        <h3 class="text-[17px] font-semibold mb-3 leading-snug" style="color:#0A0A0A; letter-spacing:-0.01em;">
           Vous avez fait l’onboarding. La rétention n’a pas bougé.
         </h3>
-        <p class="text-[15px]" style="color:#525252; line-height:1.6;">
+        <p class="text-[14px] mb-5 flex-1" style="color:#525252; line-height:1.55;">
           Tour produit, checklists, emails de bienvenue… tout est en place. Mais 30&nbsp;jours après, vos courbes restent plates. Vous commencez à douter du produit lui-même.
         </p>
+        <!-- Mock flat retention line (amber → stagnation) -->
+        <div class="pt-4" style="border-top:1px solid #E7E5E4;" aria-hidden="true">
+          <div class="relative" style="height:48px;">
+            <svg viewBox="0 0 100 48" preserveAspectRatio="none" style="position:absolute; inset:0; width:100%; height:100%;">
+              <path d="M0 38 L25 36 L50 37 L75 38 L100 37 L100 48 L0 48 Z" fill="rgba(245,158,11,0.12)"/>
+              <path d="M0 38 L25 36 L50 37 L75 38 L100 37" stroke="#f59e0b" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Markers points -->
+              <circle cx="0" cy="38" r="1.4" fill="#f59e0b"/>
+              <circle cx="25" cy="36" r="1.4" fill="#f59e0b"/>
+              <circle cx="50" cy="37" r="1.4" fill="#f59e0b"/>
+              <circle cx="75" cy="38" r="1.4" fill="#f59e0b"/>
+              <circle cx="100" cy="37" r="1.4" fill="#f59e0b"/>
+            </svg>
+          </div>
+          <div class="flex items-center justify-between mt-2 mono" style="font-size:9px; color:#737373;">
+            <span>M1</span><span>M2</span><span>M3</span><span>M4</span><span>M5</span>
+          </div>
+        </div>
       </div>
 
-      <div class="card">
-        <p class="text-[11px] font-semibold mb-5 tracking-widest" style="color:#A3A3A3; letter-spacing:0.12em;">03</p>
-        <h3 class="text-[19px] font-semibold mb-3 leading-snug" style="color:#0A0A0A; letter-spacing:-0.01em;">
+      <!-- CASE 03 -->
+      <div class="card card-elevated flex flex-col" style="padding:22px; transform:rotate(1deg); transform-origin:center;">
+        <div class="flex items-center justify-between mb-5">
+          <span class="mono-label" style="color:#10B981;">CASE 03</span>
+          <div class="flex gap-1" aria-hidden="true">
+            <span class="w-1.5 h-1.5 rounded-full" style="background:#E7E5E4;"></span>
+            <span class="w-1.5 h-1.5 rounded-full" style="background:#E7E5E4;"></span>
+            <span class="w-1.5 h-1.5 rounded-full" style="background:#10B981;"></span>
+          </div>
+        </div>
+        <h3 class="text-[17px] font-semibold mb-3 leading-snug" style="color:#0A0A0A; letter-spacing:-0.01em;">
           Vous ne savez pas qui est vraiment activé.
         </h3>
-        <p class="text-[15px]" style="color:#525252; line-height:1.6;">
+        <p class="text-[14px] mb-5 flex-1" style="color:#525252; line-height:1.55;">
           Sans définition claire d’un utilisateur activé, vous pilotez à l’aveugle et chaque nouveau client risque de churner.
         </p>
+        <!-- Mock dashboard avec valeurs vides (CHURN en rouge alarme) -->
+        <div class="pt-4" style="border-top:1px solid #E7E5E4;" aria-hidden="true">
+          <div class="grid grid-cols-3 gap-2">
+            <div class="rounded p-2" style="background:rgba(16,185,129,0.05); border:1px solid rgba(16,185,129,0.2);">
+              <p class="mono-label mb-1" style="font-size:8px; color:#10B981;">ACTIFS</p>
+              <p class="mono" style="color:#A3A3A3; font-size:18px; font-weight:600; line-height:1;">—</p>
+            </div>
+            <div class="rounded p-2" style="background:rgba(245,158,11,0.05); border:1px solid rgba(245,158,11,0.2);">
+              <p class="mono-label mb-1" style="font-size:8px; color:#f59e0b;">ENGAGÉS</p>
+              <p class="mono" style="color:#A3A3A3; font-size:18px; font-weight:600; line-height:1;">—</p>
+            </div>
+            <div class="rounded p-2" style="background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.25);">
+              <p class="mono-label mb-1" style="font-size:8px; color:#ef4444;">CHURN</p>
+              <p class="mono" style="color:#ef4444; font-size:18px; font-weight:700; line-height:1;">?</p>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
 
     <!-- Transition phrase -->
-    <p class="text-center mt-16 font-medium" style="font-size:clamp(17px,2vw,22px); color:#737373; line-height:1.55; max-width:760px; margin-left:auto; margin-right:auto;">
+    <p class="text-center mt-16" style="font-size:clamp(17px,2vw,22px); font-weight:500; color:#737373; line-height:1.55; max-width:760px; margin-left:auto; margin-right:auto; text-wrap:balance;">
       Le problème n’est pas votre produit. C’est le chemin entre l’inscription
       et la première vraie utilisation.
     </p>
@@ -397,81 +669,113 @@
   <div class="wrap">
 
     <!-- Header -->
-    <div class="flex flex-col items-center text-center gap-4 mb-14">
+    <div class="flex flex-col items-center text-center gap-4 mb-14 reveal">
       <div class="badge">Notre approche</div>
       <h2 class="h2" style="max-width:660px; color:#0A0A0A;">L’onboarding "classique" ne suffit plus.</h2>
       <p class="body" style="max-width:480px;">Deux philosophies. Des résultats très différents.</p>
     </div>
 
-    <!-- Comparison -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl mx-auto">
+    <!-- Comparison — style "tier comparison" avec badge VS -->
+    <div class="relative max-w-4xl mx-auto">
 
-      <!-- Left: classic -->
-      <div class="card" style="background:#FAFAF9;">
-        <p class="text-[12px] font-semibold mb-6" style="color:#A3A3A3; letter-spacing:0.08em;">Onboarding UX classique</p>
-        <ul class="flex flex-col gap-4">
-          <li class="flex items-start gap-3">
-            <span class="mt-[5px] w-4 h-4 rounded-full flex items-center justify-center shrink-0" style="background:#F0EFEE; border:1px solid #E7E5E4;">
-              <span class="w-1 h-1 rounded-full" style="background:#A3A3A3;"></span>
-            </span>
-            <span class="text-[15px]" style="color:#525252;">Tour produit, checklists, pop-ups</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="mt-[5px] w-4 h-4 rounded-full flex items-center justify-center shrink-0" style="background:#F0EFEE; border:1px solid #E7E5E4;">
-              <span class="w-1 h-1 rounded-full" style="background:#A3A3A3;"></span>
-            </span>
-            <span class="text-[15px]" style="color:#525252;">Mesure : completion rate</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="mt-[5px] w-4 h-4 rounded-full flex items-center justify-center shrink-0" style="background:#F0EFEE; border:1px solid #E7E5E4;">
-              <span class="w-1 h-1 rounded-full" style="background:#A3A3A3;"></span>
-            </span>
-            <span class="text-[15px]" style="color:#525252;">Optimise l’interface</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="mt-[5px] w-4 h-4 rounded-full flex items-center justify-center shrink-0" style="background:#F0EFEE; border:1px solid #E7E5E4;">
-              <span class="w-1 h-1 rounded-full" style="background:#A3A3A3;"></span>
-            </span>
-            <span class="text-[15px]" style="color:#525252;">Job d’un designer</span>
-          </li>
-        </ul>
+      <!-- VS badge centré (desktop) -->
+      <div class="hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 items-center justify-center"
+           style="width:44px; height:44px; border-radius:9999px; background:#fff; border:1px solid #E7E5E4; box-shadow:0 4px 14px -4px rgba(10,10,10,0.1); color:#737373;"
+           aria-hidden="true">
+        <span class="mono" style="font-size:11px; font-weight:700; letter-spacing:0.08em;">VS</span>
       </div>
 
-      <!-- Right: activation -->
-      <div class="card" style="border:2px solid rgba(16,185,129,0.35);">
-        <p class="text-[12px] font-semibold mb-6" style="color:#10B981; letter-spacing:0.08em;">Système d’activation</p>
-        <ul class="flex flex-col gap-4">
-          <li class="flex items-start gap-3">
-            <span class="mt-[5px] w-4 h-4 rounded-full flex items-center justify-center shrink-0" style="background:rgba(16,185,129,0.12);">
-              <span class="w-1 h-1 rounded-full" style="background:#10B981;"></span>
-            </span>
-            <span class="text-[15px] font-medium" style="color:#0A0A0A;">Parcours vers la première valeur</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="mt-[5px] w-4 h-4 rounded-full flex items-center justify-center shrink-0" style="background:rgba(16,185,129,0.12);">
-              <span class="w-1 h-1 rounded-full" style="background:#10B981;"></span>
-            </span>
-            <span class="text-[15px] font-medium" style="color:#0A0A0A;">Mesure : taux d’utilisateurs actifs</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="mt-[5px] w-4 h-4 rounded-full flex items-center justify-center shrink-0" style="background:rgba(16,185,129,0.12);">
-              <span class="w-1 h-1 rounded-full" style="background:#10B981;"></span>
-            </span>
-            <span class="text-[15px] font-medium" style="color:#0A0A0A;">Optimise le time-to-value</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="mt-[5px] w-4 h-4 rounded-full flex items-center justify-center shrink-0" style="background:rgba(16,185,129,0.12);">
-              <span class="w-1 h-1 rounded-full" style="background:#10B981;"></span>
-            </span>
-            <span class="text-[15px] font-medium" style="color:#0A0A0A;">Job d’un système (produit + data + comportement)</span>
-          </li>
-        </ul>
-      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
 
+        <!-- Left: classic (style "deprecated tier") -->
+        <div class="card card-elevated overflow-hidden flex flex-col" style="background:#FAFAF9; padding:0;">
+          <!-- Header band -->
+          <div class="px-7 pt-6 pb-5" style="border-bottom:1px solid #E7E5E4;">
+            <div class="flex items-center justify-between mb-3">
+              <span class="mono-label">APPROCHE A</span>
+              <span class="mono inline-flex items-center px-2 py-0.5 rounded text-[9px] font-semibold uppercase"
+                    style="background:#F0EFEE; color:#A3A3A3; letter-spacing:0.1em; border:1px solid #E7E5E4;">SURFACE</span>
+            </div>
+            <h3 class="text-[18px] font-semibold" style="color:#525252; letter-spacing:-0.01em;">Onboarding UX classique</h3>
+          </div>
+          <!-- Items -->
+          <ul class="px-7 py-6 space-y-4 flex-1">
+            <li class="flex items-start gap-3">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A3A3A3" stroke-width="2.2" stroke-linecap="round" class="shrink-0 mt-1" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              <span class="text-[14px]" style="color:#737373;">Tour produit, checklists, pop-ups</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A3A3A3" stroke-width="2.2" stroke-linecap="round" class="shrink-0 mt-1" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              <span class="text-[14px]" style="color:#737373;">Mesure&nbsp;: completion rate</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A3A3A3" stroke-width="2.2" stroke-linecap="round" class="shrink-0 mt-1" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              <span class="text-[14px]" style="color:#737373;">Optimise l’interface</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A3A3A3" stroke-width="2.2" stroke-linecap="round" class="shrink-0 mt-1" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              <span class="text-[14px]" style="color:#737373;">Job d’un designer</span>
+            </li>
+          </ul>
+          <!-- Footer outcome -->
+          <div class="px-7 py-4" style="border-top:1px solid #E7E5E4; background:#F0EFEE;">
+            <div class="flex items-center justify-between">
+              <span class="mono-label" style="font-size:10px;">RÉSULTAT</span>
+              <span class="text-[13px] font-medium" style="color:#737373;">Rétention plate</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: activation (style "active tier") -->
+        <div class="card card-elevated overflow-hidden flex flex-col relative" style="padding:0; border:1.5px solid rgba(16,185,129,0.4); box-shadow:0 0 28px rgba(16,185,129,0.12);">
+          <!-- Header band -->
+          <div class="px-7 pt-6 pb-5" style="border-bottom:1px solid #E7E5E4;">
+            <div class="flex items-center justify-between mb-3">
+              <span class="mono-label" style="color:#10B981;">APPROCHE B</span>
+              <span class="mono inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[9px] font-semibold uppercase"
+                    style="background:rgba(10,10,10,0.06); color:#0A0A0A; letter-spacing:0.1em; border:1px solid rgba(10,10,10,0.12);">
+                <span class="relative flex w-1 h-1" aria-hidden="true">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60" style="background:#0A0A0A;"></span>
+                  <span class="relative inline-flex rounded-full w-1 h-1" style="background:#0A0A0A;"></span>
+                </span>
+                NEA LABS
+              </span>
+            </div>
+            <h3 class="text-[18px] font-semibold" style="color:#0A0A0A; letter-spacing:-0.01em;">Système d’activation</h3>
+          </div>
+          <!-- Items -->
+          <ul class="px-7 py-6 space-y-4 flex-1">
+            <li class="flex items-start gap-3">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-1" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span class="text-[14px] font-medium" style="color:#0A0A0A;">Parcours vers la première valeur</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-1" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span class="text-[14px] font-medium" style="color:#0A0A0A;">Mesure&nbsp;: taux d’utilisateurs actifs</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-1" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span class="text-[14px] font-medium" style="color:#0A0A0A;">Optimise le time-to-value</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-1" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span class="text-[14px] font-medium" style="color:#0A0A0A;">Job d’un système (produit + data + comportement)</span>
+            </li>
+          </ul>
+          <!-- Footer outcome -->
+          <div class="px-7 py-4" style="border-top:1px solid rgba(16,185,129,0.2); background:rgba(16,185,129,0.06);">
+            <div class="flex items-center justify-between">
+              <span class="mono-label" style="font-size:10px; color:#059669;">RÉSULTAT</span>
+              <span class="text-[13px] font-semibold" style="color:#0A0A0A;">Users actifs en hausse</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <!-- Final phrase -->
-    <p class="text-center mt-16 font-semibold text-[20px]" style="color:#0A0A0A; letter-spacing:-0.01em;">
+    <p class="text-center mt-16" style="font-size:clamp(17px,2vw,22px); font-weight:500; color:#737373; line-height:1.55; max-width:760px; margin-left:auto; margin-right:auto; text-wrap:balance;">
       La valeur ne s’explique pas. Elle se vit.
     </p>
 
@@ -486,70 +790,95 @@
   <div class="wrap">
 
     <!-- Header -->
-    <div class="flex flex-col items-center text-center gap-4 mb-14">
+    <div class="flex flex-col items-center text-center gap-4 mb-14 reveal">
       <div class="badge">La méthode</div>
       <h2 class="h2" style="color:#0A0A0A;">Notre framework d’activation en 5 étapes.</h2>
       <p class="body" style="max-width:460px;">Chaque audit suit ce framework. Pas de variante. Pas d’improvisation.</p>
     </div>
 
     <!-- Desktop: horizontal -->
-    <div class="hidden lg:flex items-stretch">
+    <div class="hidden lg:flex items-stretch reveal-stagger">
 
-      <!-- Step 01 -->
-      <div class="card flex-1 rounded-2xl" style="padding:28px 24px;">
-        <p class="text-[10px] font-bold mb-4" style="color:#A3A3A3; letter-spacing:0.16em;">01</p>
+      <!-- Step 01 — Indigo -->
+      <div class="card card-elevated flex-1 rounded-2xl" style="padding:24px 22px;">
+        <div class="flex items-center justify-between mb-4">
+          <span class="icon-tile" style="width:32px; height:32px; border-radius:8px; background:rgba(99,102,241,0.1); border-color:rgba(99,102,241,0.25); color:#6366f1;" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          </span>
+          <span class="mono-label" style="font-size:10px; color:#6366f1;">01</span>
+        </div>
         <h3 class="text-[15px] font-semibold mb-2" style="color:#0A0A0A;">First Value</h3>
         <p class="text-[13px]" style="color:#525252; line-height:1.55;">Le moment exact où votre user comprend la valeur</p>
       </div>
 
       <!-- Connector -->
-      <div class="flex items-center shrink-0 px-1.5">
+      <div class="flex items-center shrink-0 px-1.5" aria-hidden="true">
         <div class="w-5 h-px" style="background:#E7E5E4;"></div>
         <div style="width:6px; height:6px; border-top:1px solid #E7E5E4; border-right:1px solid #E7E5E4; transform:rotate(45deg); margin-left:-3px;"></div>
       </div>
 
-      <!-- Step 02 -->
-      <div class="card flex-1 rounded-2xl" style="padding:28px 24px;">
-        <p class="text-[10px] font-bold mb-4" style="color:#A3A3A3; letter-spacing:0.16em;">02</p>
+      <!-- Step 02 — Violet -->
+      <div class="card card-elevated flex-1 rounded-2xl" style="padding:24px 22px;">
+        <div class="flex items-center justify-between mb-4">
+          <span class="icon-tile" style="width:32px; height:32px; border-radius:8px; background:rgba(139,92,246,0.1); border-color:rgba(139,92,246,0.25); color:#8b5cf6;" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19l-6-3V5l6 3"/><path d="M9 8v11"/><path d="M15 5l6 3v11l-6-3"/><path d="M15 5v11"/><path d="M9 8l6-3"/><path d="M9 19l6-3"/></svg>
+          </span>
+          <span class="mono-label" style="font-size:10px; color:#8b5cf6;">02</span>
+        </div>
         <h3 class="text-[15px] font-semibold mb-2" style="color:#0A0A0A;">Current Journey</h3>
         <p class="text-[13px]" style="color:#525252; line-height:1.55;">Le parcours réel, basé sur la data, pas le rêve</p>
       </div>
 
       <!-- Connector -->
-      <div class="flex items-center shrink-0 px-1.5">
+      <div class="flex items-center shrink-0 px-1.5" aria-hidden="true">
         <div class="w-5 h-px" style="background:#E7E5E4;"></div>
         <div style="width:6px; height:6px; border-top:1px solid #E7E5E4; border-right:1px solid #E7E5E4; transform:rotate(45deg); margin-left:-3px;"></div>
       </div>
 
-      <!-- Step 03 -->
-      <div class="card flex-1 rounded-2xl" style="padding:28px 24px;">
-        <p class="text-[10px] font-bold mb-4" style="color:#A3A3A3; letter-spacing:0.16em;">03</p>
+      <!-- Step 03 — Amber -->
+      <div class="card card-elevated flex-1 rounded-2xl" style="padding:24px 22px;">
+        <div class="flex items-center justify-between mb-4">
+          <span class="icon-tile" style="width:32px; height:32px; border-radius:8px; background:rgba(245,158,11,0.1); border-color:rgba(245,158,11,0.25); color:#f59e0b;" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+          </span>
+          <span class="mono-label" style="font-size:10px; color:#f59e0b;">03</span>
+        </div>
         <h3 class="text-[15px] font-semibold mb-2" style="color:#0A0A0A;">Activation Gaps</h3>
         <p class="text-[13px]" style="color:#525252; line-height:1.55;">Les frictions qui tuent vos users</p>
       </div>
 
       <!-- Connector -->
-      <div class="flex items-center shrink-0 px-1.5">
+      <div class="flex items-center shrink-0 px-1.5" aria-hidden="true">
         <div class="w-5 h-px" style="background:#E7E5E4;"></div>
         <div style="width:6px; height:6px; border-top:1px solid #E7E5E4; border-right:1px solid #E7E5E4; transform:rotate(45deg); margin-left:-3px;"></div>
       </div>
 
-      <!-- Step 04 -->
-      <div class="card flex-1 rounded-2xl" style="padding:28px 24px;">
-        <p class="text-[10px] font-bold mb-4" style="color:#A3A3A3; letter-spacing:0.16em;">04</p>
+      <!-- Step 04 — Cyan -->
+      <div class="card card-elevated flex-1 rounded-2xl" style="padding:24px 22px;">
+        <div class="flex items-center justify-between mb-4">
+          <span class="icon-tile" style="width:32px; height:32px; border-radius:8px; background:rgba(6,182,212,0.1); border-color:rgba(6,182,212,0.25); color:#06b6d4;" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="18" r="2"/><path d="M8 6h6a4 4 0 0 1 4 4v6"/><path d="m13 11-2 2 2 2"/></svg>
+          </span>
+          <span class="mono-label" style="font-size:10px; color:#06b6d4;">04</span>
+        </div>
         <h3 class="text-[15px] font-semibold mb-2" style="color:#0A0A0A;">Activation Path</h3>
         <p class="text-[13px]" style="color:#525252; line-height:1.55;">Le chemin simple, en 3 à 5 étapes</p>
       </div>
 
       <!-- Connector -->
-      <div class="flex items-center shrink-0 px-1.5">
+      <div class="flex items-center shrink-0 px-1.5" aria-hidden="true">
         <div class="w-5 h-px" style="background:#E7E5E4;"></div>
         <div style="width:6px; height:6px; border-top:1px solid #E7E5E4; border-right:1px solid #E7E5E4; transform:rotate(45deg); margin-left:-3px;"></div>
       </div>
 
-      <!-- Step 05 — accent -->
-      <div class="card flex-1 rounded-2xl" style="padding:28px 24px; border-color:rgba(16,185,129,0.3);">
-        <p class="text-[10px] font-bold mb-4" style="color:#10B981; letter-spacing:0.16em;">05</p>
+      <!-- Step 05 — Emerald (brand, finalité) -->
+      <div class="card card-elevated flex-1 rounded-2xl" style="padding:24px 22px; border-color:rgba(16,185,129,0.3);">
+        <div class="flex items-center justify-between mb-4">
+          <span class="icon-tile" style="width:32px; height:32px; border-radius:8px; background:rgba(16,185,129,0.1); border-color:rgba(16,185,129,0.25); color:#10B981;" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </span>
+          <span class="mono-label" style="font-size:10px; color:#10B981;">05</span>
+        </div>
         <h3 class="text-[15px] font-semibold mb-2" style="color:#0A0A0A;">Activation Layer</h3>
         <p class="text-[13px]" style="color:#525252; line-height:1.55;">Triggers et boucles qui rendent l’activation systémique</p>
       </div>
@@ -560,7 +889,7 @@
     <div class="flex lg:hidden flex-col gap-3">
 
       <div class="card">
-        <p class="text-[10px] font-bold mb-3" style="color:#A3A3A3; letter-spacing:0.16em;">01</p>
+        <p class="text-[10px] font-bold mb-3 mono" style="color:#6366f1; letter-spacing:0.16em;">01</p>
         <h3 class="text-[17px] font-semibold mb-1.5" style="color:#0A0A0A;">First Value</h3>
         <p class="text-[15px]" style="color:#525252; line-height:1.55;">Le moment exact où votre user comprend la valeur</p>
       </div>
@@ -568,7 +897,7 @@
       <div class="flex justify-center"><div class="w-px h-5" style="background:#E7E5E4;"></div></div>
 
       <div class="card">
-        <p class="text-[10px] font-bold mb-3" style="color:#A3A3A3; letter-spacing:0.16em;">02</p>
+        <p class="text-[10px] font-bold mb-3 mono" style="color:#8b5cf6; letter-spacing:0.16em;">02</p>
         <h3 class="text-[17px] font-semibold mb-1.5" style="color:#0A0A0A;">Current Journey</h3>
         <p class="text-[15px]" style="color:#525252; line-height:1.55;">Le parcours réel, basé sur la data, pas le rêve</p>
       </div>
@@ -576,7 +905,7 @@
       <div class="flex justify-center"><div class="w-px h-5" style="background:#E7E5E4;"></div></div>
 
       <div class="card">
-        <p class="text-[10px] font-bold mb-3" style="color:#A3A3A3; letter-spacing:0.16em;">03</p>
+        <p class="text-[10px] font-bold mb-3 mono" style="color:#f59e0b; letter-spacing:0.16em;">03</p>
         <h3 class="text-[17px] font-semibold mb-1.5" style="color:#0A0A0A;">Activation Gaps</h3>
         <p class="text-[15px]" style="color:#525252; line-height:1.55;">Les frictions qui tuent vos users</p>
       </div>
@@ -584,7 +913,7 @@
       <div class="flex justify-center"><div class="w-px h-5" style="background:#E7E5E4;"></div></div>
 
       <div class="card">
-        <p class="text-[10px] font-bold mb-3" style="color:#A3A3A3; letter-spacing:0.16em;">04</p>
+        <p class="text-[10px] font-bold mb-3 mono" style="color:#06b6d4; letter-spacing:0.16em;">04</p>
         <h3 class="text-[17px] font-semibold mb-1.5" style="color:#0A0A0A;">Activation Path</h3>
         <p class="text-[15px]" style="color:#525252; line-height:1.55;">Le chemin simple, en 3 à 5 étapes</p>
       </div>
@@ -592,17 +921,68 @@
       <div class="flex justify-center"><div class="w-px h-5" style="background:#E7E5E4;"></div></div>
 
       <div class="card" style="border-color:rgba(16,185,129,0.3);">
-        <p class="text-[10px] font-bold mb-3" style="color:#10B981; letter-spacing:0.16em;">05</p>
+        <p class="text-[10px] font-bold mb-3 mono" style="color:#10B981; letter-spacing:0.16em;">05</p>
         <h3 class="text-[17px] font-semibold mb-1.5" style="color:#0A0A0A;">Activation Layer</h3>
         <p class="text-[15px]" style="color:#525252; line-height:1.55;">Triggers et boucles qui rendent l’activation systémique</p>
       </div>
 
     </div>
 
-    <!-- Caption -->
-    <p class="text-center mt-10 text-[14px]" style="color:#A3A3A3;">
-      C’est ce framework qu’on applique sur chaque audit.
-    </p>
+    <!-- Timeline — 2 semaines, 4 milestones -->
+    <div class="mt-16 max-w-4xl mx-auto reveal" aria-label="Calendrier de l’audit">
+      <div class="flex items-center justify-between mb-3">
+        <span class="mono-label">CALENDRIER · 2 SEMAINES</span>
+        <span class="mono-label" style="color:#0A0A0A;">14 JOURS</span>
+      </div>
+
+      <!-- Track + markers -->
+      <div class="relative" style="height:48px;">
+        <!-- Track background -->
+        <div class="absolute left-0 right-0" style="top:14px; height:2px; background:#E7E5E4; border-radius:2px;"></div>
+        <!-- Track fill — gradient crossant la palette des étapes (extrémités noires) -->
+        <div class="absolute left-0" style="top:14px; height:2px; width:100%; background:linear-gradient(to right, #0A0A0A 0%, #6366f1 22%, #8b5cf6 35%, #f59e0b 52%, #06b6d4 68%, #10B981 85%, #0A0A0A 100%); border-radius:2px;"></div>
+
+        <!-- Markers -->
+        <div class="absolute inset-0 flex justify-between items-start">
+          <!-- J0 — Kickoff (neutre) -->
+          <div class="flex flex-col items-center">
+            <div class="w-[14px] h-[14px] rounded-full bg-white" style="border:2.5px solid #0A0A0A; margin-top:7px;"></div>
+            <span class="mono-label mt-2" style="color:#0A0A0A; font-size:10px;">J0</span>
+            <span class="text-[11px] mt-0.5" style="color:#737373;">Kickoff</span>
+          </div>
+          <!-- J3 — split indigo + violet -->
+          <div class="flex flex-col items-center" style="max-width:140px;">
+            <div class="w-[14px] h-[14px] rounded-full" style="background:linear-gradient(135deg, #6366f1 0%, #6366f1 50%, #8b5cf6 50%, #8b5cf6 100%); margin-top:7px; box-shadow:0 0 0 3px rgba(99,102,241,0.12);"></div>
+            <span class="mono-label mt-2" style="color:#6366f1; font-size:10px;">J3</span>
+            <span class="text-[11px] mt-0.5 text-center leading-tight">
+              <span style="color:#6366f1; font-weight:500;">First Value</span><span style="color:#A3A3A3;"> &amp; </span><span style="color:#8b5cf6; font-weight:500;">Current Journey</span>
+            </span>
+          </div>
+          <!-- J7 — split amber + cyan -->
+          <div class="flex flex-col items-center" style="max-width:140px;">
+            <div class="w-[14px] h-[14px] rounded-full" style="background:linear-gradient(135deg, #f59e0b 0%, #f59e0b 50%, #06b6d4 50%, #06b6d4 100%); margin-top:7px; box-shadow:0 0 0 3px rgba(245,158,11,0.12);"></div>
+            <span class="mono-label mt-2" style="color:#f59e0b; font-size:10px;">J7</span>
+            <span class="text-[11px] mt-0.5 text-center leading-tight">
+              <span style="color:#f59e0b; font-weight:500;">Activation Gaps</span><span style="color:#A3A3A3;"> &amp; </span><span style="color:#06b6d4; font-weight:500;">Activation Path</span>
+            </span>
+          </div>
+          <!-- J11 — emerald (étape 5) -->
+          <div class="flex flex-col items-center" style="max-width:140px;">
+            <div class="w-[14px] h-[14px] rounded-full" style="background:#10B981; margin-top:7px; box-shadow:0 0 0 3px rgba(16,185,129,0.12);"></div>
+            <span class="mono-label mt-2" style="color:#10B981; font-size:10px;">J11</span>
+            <span class="text-[11px] mt-0.5 text-center leading-tight">
+              <span style="color:#10B981; font-weight:500;">Activation Layer</span><span style="color:#A3A3A3;"> &amp; plan rédigé</span>
+            </span>
+          </div>
+          <!-- J14 — Présentation (neutre, comme Kickoff) -->
+          <div class="flex flex-col items-center">
+            <div class="w-[14px] h-[14px] rounded-full bg-white" style="border:2.5px solid #0A0A0A; margin-top:7px;"></div>
+            <span class="mono-label mt-2" style="color:#0A0A0A; font-size:10px;">J14</span>
+            <span class="text-[11px] mt-0.5 font-medium" style="color:#0A0A0A;">Présentation</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </div>
 </section>
@@ -615,7 +995,7 @@
   <div class="wrap">
 
     <!-- Header -->
-    <div class="flex flex-col items-center text-center gap-4 mb-14">
+    <div class="flex flex-col items-center text-center gap-4 mb-14 reveal">
       <div class="badge" style="background:rgba(16,185,129,0.08); border-color:rgba(16,185,129,0.3); color:#059669;">L’offre</div>
       <h2 class="h2" style="color:#0A0A0A;">Ce que vous repartez avec.</h2>
     </div>
@@ -693,41 +1073,50 @@
       </div>
 
       <!-- Right: pricing card -->
-      <div class="card lg:sticky lg:top-28">
+      <div class="card card-elevated lg:sticky lg:top-28">
 
-        <div class="mb-6">
-          <p class="text-[12px] font-medium mb-1" style="color:#A3A3A3;">Offre</p>
-          <h3 class="text-[22px] font-semibold" style="color:#0A0A0A; letter-spacing:-0.02em;">Audit d’activation</h3>
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <p class="mono-label mb-1.5">PRODUIT · 01</p>
+            <h3 class="text-[22px] font-semibold" style="color:#0A0A0A; letter-spacing:-0.02em;">Audit d’activation</h3>
+          </div>
+          <span class="icon-tile icon-tile-accent" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11H3v10h6V11z"/><path d="M21 3h-6v18h6V3z"/><path d="M15 7H9v14h6V7z"/></svg>
+          </span>
         </div>
 
         <div class="pb-6 mb-6" style="border-bottom:1px solid #E7E5E4;">
           <p style="font-size:42px; font-weight:700; color:#0A0A0A; letter-spacing:-0.04em; line-height:1; font-variant-numeric:tabular-nums;">À partir de 1&nbsp;500&nbsp;€</p>
           <span class="inline-flex items-center gap-1.5 mt-3 px-3 py-1 rounded-full text-[12px] font-semibold"
                 style="background:rgba(16,185,129,0.1); color:#059669; border:1px solid rgba(16,185,129,0.25);">
+            <span class="relative flex w-1.5 h-1.5" aria-hidden="true">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60" style="background:#10B981;"></span>
+              <span class="relative inline-flex rounded-full w-1.5 h-1.5" style="background:#10B981;"></span>
+            </span>
             Tarif lancement&nbsp;· 10&nbsp;premiers clients
           </span>
         </div>
 
         <div class="flex flex-col gap-3.5 mb-8">
           <div class="flex items-center justify-between">
-            <span class="text-[15px]" style="color:#525252;">Durée</span>
-            <span class="text-[15px] font-medium" style="color:#0A0A0A;">2 semaines</span>
+            <span class="mono-label" style="color:#737373;">DURÉE</span>
+            <span class="text-[15px] font-medium mono" style="color:#0A0A0A;">2 semaines</span>
           </div>
           <div class="flex items-center justify-between">
-            <span class="text-[15px]" style="color:#525252;">Format</span>
-            <span class="text-[15px] font-medium" style="color:#0A0A0A;">100% remote</span>
+            <span class="mono-label" style="color:#737373;">FORMAT</span>
+            <span class="text-[15px] font-medium mono" style="color:#0A0A0A;">100% remote</span>
           </div>
           <div class="flex items-center justify-between">
-            <span class="text-[15px]" style="color:#525252;">Prérequis</span>
-            <span class="text-[15px] font-medium" style="color:#0A0A0A;">10+ users payants</span>
+            <span class="mono-label" style="color:#737373;">PRÉREQUIS</span>
+            <span class="text-[15px] font-medium mono" style="color:#0A0A0A;">10+ users payants</span>
           </div>
         </div>
 
         <a href="https://cal.com/kevin-silve/30min" target="_blank" rel="noopener"
-           class="block w-full text-center bg-[#0A0A0A] text-white rounded-full text-[15px] font-medium hover:opacity-90 transition-opacity"
+           class="group block w-full text-center bg-[#0A0A0A] text-white rounded-full text-[15px] font-medium hover:opacity-90 transition-opacity"
            style="padding:14px 32px; letter-spacing:0.005em;"
            aria-label="Réserver un diagnostic gratuit">
-          Réserver un diagnostic →
+          Réserver un diagnostic <span class="cta-arrow">→</span>
         </a>
         <p class="text-center mt-3 text-[13px]" style="color:#A3A3A3;">30&nbsp;min&nbsp;· Gratuit&nbsp;· Sans engagement</p>
 
@@ -810,7 +1199,7 @@
   <div class="wrap">
 
     <!-- Header -->
-    <div class="flex flex-col items-center text-center gap-4 mb-14">
+    <div class="flex flex-col items-center text-center gap-4 mb-14 reveal">
       <div class="badge">FAQ</div>
       <h2 class="h2" style="color:#0A0A0A;">Questions fréquentes.</h2>
     </div>
@@ -979,8 +1368,10 @@
 <!-- ============================================================
      CTA FINAL — dark
      ============================================================ -->
-<section id="diagnostic" class="section dark-surface" style="background:#0A0A0A;">
-  <div class="wrap flex flex-col items-center text-center gap-8">
+<section id="diagnostic" class="section dark-surface grid-bg-dark relative overflow-hidden" style="background:#0A0A0A;">
+  <!-- Ambient glow -->
+  <div aria-hidden="true" style="position:absolute; top:-200px; left:50%; transform:translateX(-50%); width:600px; height:400px; background:radial-gradient(closest-side, rgba(16,185,129,0.18), transparent); pointer-events:none;"></div>
+  <div class="wrap flex flex-col items-center text-center gap-8 relative">
 
     <h2 class="h2" style="color:#fff; max-width:680px;">
       Vous pouvez continuer à deviner. Ou découvrir.
@@ -996,10 +1387,10 @@
          style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1); box-shadow:0 0 40px rgba(16,185,129,0.18);">
       <span class="px-5 py-3 text-white text-[15px] font-medium select-none">Commencer</span>
       <a href="https://cal.com/kevin-silve/30min" target="_blank" rel="noopener"
-         class="bg-[#10B981] text-white rounded-full text-[15px] font-medium hover:opacity-90 transition-opacity"
+         class="group bg-[#10B981] text-white rounded-full text-[15px] font-medium hover:opacity-90 transition-opacity"
          style="padding:14px 28px; letter-spacing:0.005em;"
          aria-label="Réserver un diagnostic gratuit de 30 minutes">
-        Diagnostic gratuit →
+        Diagnostic gratuit <span class="cta-arrow">→</span>
       </a>
     </div>
 
@@ -1043,6 +1434,25 @@
 
 <!-- Dynamic year -->
 <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+
+<!-- Scroll reveal observer -->
+<script>
+  (function () {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal, .reveal-stagger').forEach(function (el) { el.classList.add('is-visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal, .reveal-stagger').forEach(function (el) { io.observe(el); });
+  })();
+</script>
 
 </body>
 </html>
