@@ -313,6 +313,41 @@
 
     /* FAQ accordion */
     [x-cloak] { display: none !important; }
+
+    /* Logos marquee — défilement horizontal infini */
+    .logos-marquee {
+      position: relative;
+      overflow: hidden;
+      mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    }
+    .logos-track {
+      display: flex;
+      align-items: center;
+      gap: 72px;
+      width: max-content;
+      animation: logos-scroll 38s linear infinite;
+      will-change: transform;
+    }
+    .logos-marquee:hover .logos-track { animation-play-state: paused; }
+    .logo-item {
+      height: 36px;
+      width: auto;
+      flex-shrink: 0;
+      filter: grayscale(1);
+      opacity: .55;
+      transition: filter .3s ease, opacity .3s ease;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .logo-item:hover { filter: grayscale(0); opacity: 1; }
+    @keyframes logos-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .logos-track { animation: none; }
+    }
   </style>
 </head>
 <body>
@@ -440,6 +475,36 @@
       <p class="text-center mt-3 text-[12px]" style="color:#A3A3A3;">2&nbsp;min · Découvre l’offre Partenaire Produit en vidéo</p>
     </div>
 
+  </div>
+</section>
+
+
+<!-- ============================================================
+     LOGOS CLIENTS — Marquee infini
+     ============================================================ -->
+<section aria-label="Ils m’ont fait confiance" style="background:#FAFAF9; padding:64px 0; border-top:1px solid #E7E5E4; border-bottom:1px solid #E7E5E4;">
+  <div class="wrap">
+    <p class="mono-label text-center mb-8" style="color:#737373;">Ils m’ont fait confiance</p>
+    <div class="logos-marquee">
+      <div class="logos-track">
+        <!-- série 1 -->
+        <img class="logo-item" src="logo-tf1.png"        alt="TF1"        loading="lazy">
+        <img class="logo-item" src="logo-edf.png"        alt="EDF"        loading="lazy">
+        <img class="logo-item" src="logo-vysion.svg"     alt="Vysion"     loading="lazy">
+        <img class="logo-item" src="logo-vokse.svg"      alt="Vokse"      loading="lazy">
+        <img class="logo-item" src="logo-starknet.svg"   alt="Starknet"   loading="lazy">
+        <img class="logo-item" src="logo-ligue1.svg"     alt="Ligue 1"    loading="lazy">
+        <img class="logo-item" src="logo-betomorrow.svg" alt="BeTomorrow" loading="lazy">
+        <!-- série 2 (dupliquée pour boucle infinie sans saut) -->
+        <img class="logo-item" src="logo-tf1.png"        alt="" aria-hidden="true" loading="lazy">
+        <img class="logo-item" src="logo-edf.png"        alt="" aria-hidden="true" loading="lazy">
+        <img class="logo-item" src="logo-vysion.svg"     alt="" aria-hidden="true" loading="lazy">
+        <img class="logo-item" src="logo-vokse.svg"      alt="" aria-hidden="true" loading="lazy">
+        <img class="logo-item" src="logo-starknet.svg"   alt="" aria-hidden="true" loading="lazy">
+        <img class="logo-item" src="logo-ligue1.svg"     alt="" aria-hidden="true" loading="lazy">
+        <img class="logo-item" src="logo-betomorrow.svg" alt="" aria-hidden="true" loading="lazy">
+      </div>
+    </div>
   </div>
 </section>
 
